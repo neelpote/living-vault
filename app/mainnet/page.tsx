@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
-import { F1Gallery } from '@/components/f1-gallery';
-export const metadata: Metadata = {title: 'Mainnet F1 Edition | Living Vault', description: 'Real F1 results and on-chain art on Monad Mainnet. Wallet-signed deployments and free NFT minting plus real MON gas.'};
-export default function MainnetPage() { return <F1Gallery mainnet/>; }
+import { Exhibition } from '@/components/art';
+import { Collection } from '@/components/collection';
+import { LandingStory, LandingQuestions } from '@/components/landing-story';
+export const metadata: Metadata = {title: 'Mainnet Exhibition | Living Vault', description: 'Living artwork, native MON vaults, real F1 results and shared collections on Monad Mainnet.'};
+export default function MainnetPage() { return <div className="home-page"><Exhibition mainnet/><LandingStory mainnet/><Collection mainnet/><LandingQuestions mainnet/></div>; }

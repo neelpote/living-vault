@@ -18,7 +18,7 @@ export function NFTDetail({collection,tokenId,mainnet=false}:{collection:string;
   useEffect(()=>{if(!supported||configured.address)return;try{const saved=JSON.parse(localStorage.getItem(`living-vault-${collection==='f1'?'f1':'shared'}${mainnet?'-mainnet':''}`)||'null');if(saved?.chainId===(mainnet?143:10143)&&isAddress(saved.address))setContract(saved.address);}catch{}},[collection,mainnet]);
   const id=/^[1-9]\d{0,76}$/.test(tokenId)&&BigInt(tokenId)<2n**256n?BigInt(tokenId):undefined;
   const client=mainnet?mainnetClient:publicClient;const explorerURL=mainnet?mainnetExplorer:explorer;
-  const back=collection==='f1'?(mainnet?'/mainnet':'/f1'):(mainnet?'/mainnet/together':'/together');
+  const back=collection==='f1'?(mainnet?'/mainnet/f1':'/f1'):(mainnet?'/mainnet/together':'/together');
   const nft=useQuery({queryKey:['nft-detail',mainnet?143:10143,contract,tokenId],enabled:supported&&!!contract&&id!==undefined,refetchInterval:15000,queryFn:async()=>{
     const [owner,uri]=await Promise.all([client.readContract({address:contract!,abi,functionName:'ownerOf',args:[id!]}),client.readContract({address:contract!,abi,functionName:'tokenURI',args:[id!]})]);return {owner,uri,...decodeMetadata(uri)};
   }});

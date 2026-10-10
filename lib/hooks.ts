@@ -5,14 +5,18 @@ import { useRef, useState } from 'react';
 import { type Abi, type Address, type Hash, formatEther, parseEther, type TransactionReceipt, type PublicClient } from 'viem';
 import { vaultAbi } from '@/lib/generated/LivingVault';
 import { tokenAbi } from '@/lib/generated/MockUSDC';
-import { publicClient, decodeMetadata, type Vault } from '@/lib/chain';
+import { publicClient, mainnetClient, decodeMetadata, type Vault } from '@/lib/chain';
+import nativeConfiguration from '@/config/native-mainnet.json';
+import { nativeVaultAbi } from '@/lib/generated/NativeLivingVault';
 import { useDeployment } from '@/components/providers';
 
-export async function fetchVault(address: Address, id: bigint): Promise<Vault> {
+export async function fetchVault(address: Address, id: bigint, mainnet = false): Promise<Vault> {
+  const client = mainnet ? mainnetClient : publicClient;
+  const abi = mainnet ? nativeVaultAbi : vaultAbi;
   const [info, owner, uri] = await Promise.all([
-    publicClient.readContract({ address, abi: vaultAbi, functionName: 'vaultInfo', args: [id] }),
-    publicClient.readContract({ address, abi: vaultAbi, functionName: 'ownerOf', args: [id] }),
-    publicClient.readContract({ address, abi: vaultAbi, functionName: 'tokenURI', args: [id] })
+    client.readContract({ address, abi, functionName: 'vaultInfo', args: [id] }),
+    client.readContract({ address, abi, functionName: 'ownerOf', args: [id] }),
+    client.readContract({ address, abi, functionName: 'tokenURI', args: [id] })
   ]);
   return { id, owner, principal: info[0], count: info[1], level: Number(info[2]), mintedAt: Number(info[3]), image: decodeMetadata(uri).image, uri };
 }
@@ -26,20 +30,23 @@ export function useBalances() {
   return useQuery({ queryKey: ['balances', deployment.mockUSDC, address], enabled: !!address,
     queryFn: async () => ({ mon: await publicClient.getBalance({ address: address! }), token: deployment.mockUSDC ? await publicClient.readContract({ address: deployment.mockUSDC, abi: tokenAbi, functionName: 'balanceOf', args: [address!] }) : 0n }) });
 }
-export function useCollection() {
+export function useCollection(mainnet = false) {
   const { address } = useAccount(); const { deployment } = useDeployment();
-  return useQuery({ queryKey: ['collection', deployment.livingVault, address], enabled: !!address && !!deployment.livingVault,
+  const contract = mainnet ? nativeConfiguration.address as Address : deployment.livingVault;
+  const client = mainnet ? mainnetClient : publicClient;
+  const abi = mainnet ? nativeVaultAbi : vaultAbi;
+  return useQuery({ queryKey: ['collection', mainnet ? 143 : 10143, contract, address], enabled: !!address && !!contract,
     queryFn: async () => {
-      const total = await publicClient.readContract({ address: deployment.livingVault!, abi: vaultAbi, functionName: 'balanceOf', args: [address!] });
+      const total = await client.readContract({ address: contract!, abi, functionName: 'balanceOf', args: [address!] });
       const ids: bigint[] = [];
       // Bounded chunks protect public RPCs and handle collections beyond the first page.
       for (let offset = 0n; offset < total; offset += 20n) {
         const length = Number(total - offset > 20n ? 20n : total - offset);
-        const page = await publicClient.multicall({ allowFailure: false, contracts: Array.from({ length }, (_, i) => ({ address: deployment.livingVault!, abi: vaultAbi, functionName: 'tokenOfOwnerByIndex' as const, args: [address!, offset + BigInt(i)] as const })) });
+        const page = await client.multicall({ allowFailure: false, contracts: Array.from({ length }, (_, i) => ({ address: contract!, abi, functionName: 'tokenOfOwnerByIndex' as const, args: [address!, offset + BigInt(i)] as const })) });
         ids.push(...page);
       }
       const vaults: Vault[] = [];
-      for (let offset = 0; offset < ids.length; offset += 4) vaults.push(...await Promise.all(ids.slice(offset, offset + 4).map(id => fetchVault(deployment.livingVault!, id))));
+      for (let offset = 0; offset < ids.length; offset += 4) vaults.push(...await Promise.all(ids.slice(offset, offset + 4).map(id => fetchVault(contract!, id, mainnet))));
       return vaults;
     } });
 }

@@ -23,9 +23,9 @@ export function ArtFrame({ image, oval = false, className = '', previous, evolvi
   return <div className={`art-frame ${oval ? 'oval' : ''} ${className} ${evolving ? 'evolving' : ''} ${redeemed ? 'dissolving' : ''}`}><div className="frame-bevel"><div className="art-window">{previous && evolving && <img src={original ? previous : oldRendered ?? previous} alt="Previous state of the artwork" className="art-previous"/>}<img src={shown} alt={alt ?? (original ? 'Original on-chain artwork' : 'Living Vault sculptural bloom demo artwork')} className={evolving ? 'art-new' : ''}/></div></div></div>;
 }
 
-export function Exhibition() {
+export function Exhibition({mainnet = false}: {mainnet?: boolean} = {}) {
   return <section className="exhibition" aria-label="Living Vault exhibition">
-    <div className="exhibition-kicker"><span>EST. 2026 / AN ON-CHAIN EXHIBITION</span><span className="network-dot">Monad Testnet · 10143</span></div>
+    <div className="exhibition-kicker"><span>EST. 2026 / AN ON-CHAIN EXHIBITION</span><span className="network-dot">{mainnet ? 'Monad Mainnet · 143' : 'Monad Testnet · 10143'}</span></div>
     <div className="hero-composition museum-composition">
       <div className="side-caption"><span>ART, IN A CONSTANT<br/>STATE OF BECOMING.</span><span>001 — ∞</span></div>
       <h1>LIVING<br/><span>VAULT</span></h1>
@@ -36,8 +36,8 @@ export function Exhibition() {
     </div>
     <div className="exhibition-bottom">
       <div className="exhibition-note"><span className="eyebrow">A LIVING COLLECTION</span><p>A deposit becomes a brushstroke.<br/>A vault becomes a work of art.</p></div>
-      <div className="demo-controls museum-links"><div><span className="eyebrow">THE ORACLE COLLECTION</span><a href="/f1">Explore real F1 artwork<ArrowUpRight size={15}/></a></div><a href="/docs#art-credits" className="museum-credits-link">Art credits<ArrowUpRight size={12}/></a></div>
-      <a href="/create" className="exhibition-cta"><span>Create your vault</span><ArrowRight size={32}/></a>
+      <div className="demo-controls museum-links"><div><span className="eyebrow">THE ORACLE COLLECTION</span><a href={mainnet ? "/mainnet/f1" : "/f1"}>Explore real F1 artwork<ArrowUpRight size={15}/></a></div><a href="/docs#art-credits" className="museum-credits-link">Art credits<ArrowUpRight size={12}/></a></div>
+      <a href={mainnet ? "/mainnet/vault" : "/create"} className="exhibition-cta"><span>Create your vault</span><ArrowRight size={32}/></a>
     </div>
   </section>;
 }

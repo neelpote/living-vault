@@ -160,6 +160,8 @@ Shared collection: `npm run shared:test` passed 21 local contract/browser checks
 
 ## Who It Is For
 
+**Build-in-public reach:** 1,000+ impressions across platforms, reported by the team. This is awareness, not verified customer traction; impressions are not equivalent to video views.
+
 Artists and sports communities can use living collectibles to express ongoing participation rather than a static purchase. The proposed revenue model is **commissioned collections and optional hosted publishing services**, not returns on deposited funds.
 
 Next validation steps are community interviews, artist-led pilots, and measuring independent mints and repeat visits after real results. Revenue and product-market fit are not yet established. Commercial sports branding and data rights require separate review; this prototype is not affiliated with Formula 1 or its teams.
@@ -182,7 +184,7 @@ Run `npm run native:compile` and `npm run native:test` to reproduce 20 native cu
 
 ### Mainnet Status
 
-**[Mainnet F1 collection](https://livingvault.pics/mainnet) · [Mainnet shared composition](https://livingvault.pics/mainnet/together)**
+**[Mainnet F1 collection](https://livingvault.pics/mainnet/f1) · [Mainnet shared composition](https://livingvault.pics/mainnet/together)**
 
 Both art collections are deployed on chain143. F1 is verified on both explorers; shared art is verified on Monadscan. These collections have no deposit balance or native-value payment; wallets pay real MON gas. The original mUSDC vault remains Testnet only; the separate MON vault has its own custody scope above. Read-only `npm run mainnet:check` passes exact receipts/constructor calldata, immutable oracle links, all11 real team values and original SVG checks. F1 NFT No. 1 is minted to the creator's wallet; shared mainnet claim/chapter activation and independent audit remain unconfirmed. [Mainnet evidence](docs/mainnet-evidence.json). NFT detail pages read actual metadata and ownership directly, without depending on explorer NFT indexing.
 

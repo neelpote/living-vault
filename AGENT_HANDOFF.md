@@ -4,6 +4,15 @@ Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted.
 
 ## Mainnet Deployment (Confirmed)
 
+### Network Home Routing (Latest)
+
+- User requested Mainnet switch open HOME, not F1. `/mainnet` now mirrors the exhibition landing page with mainnet-specific labels, native MON instructions, real owned native vault gallery and mainnet action links. Mainnet F1 moved to `/mainnet/f1`. Network switches always open `/mainnet` or `/`; rejected connected-wallet changes retain current route. Wordmark, exhibition navigation and footer home stay on the selected edition. Updated NFT back links, shared oracle link, docs and README F1 link.
+- `useCollection(mainnet)` and `fetchVault(...,mainnet)` select actual native ABI/address/chain143, with network-separated cache keys. Existing Testnet callers default to unchanged chain10143 reads. No fabricated holdings or cross-network balances.
+- User reports1000+ impressions across platforms. README labels this team-reported awareness, not verified customer traction or video views. No analytics screenshots or social post URLs supplied; do not claim independently verified metrics or the5000-view prize criterion.
+- Published `dpl_AgoqoejT4vNppi4vWbfrjDzwsRkY`, READY, https://livingvault.pics, deployment https://living-vault-7cwy9bvaq-neelpote44-7832s-projects.vercel.app. Actual PUBLIC11-route browser suite PASS at1440/390/320, all images/font loads, no overflow/page/hydration errors; clicked both network switches and confirmed exhibition home, not F1. Local suite also PASS. Production mobile homepage screenshot reviewed.
+- Fresh mainnet art and native read-only checks PASS; evidence refreshed. Native NFT1 principal0.01MON, topups0. No live top-up/redemption or agent-signed public writes. Build/typecheck PASS, original22 Testnet wallet/browser checks PASS, mainnet12 isolated wallet/browser checks PASS, including connected network switching to homes and rejected-switch preservation.
+- Current intentional dev server session35241, localhost3000, supersedes older dev session references. No transient tests/deployments remain running after close-out.
+
 ### Final Website Checks (2026-10-10)
 
 - Resumed final polish after README/mainnet proof commit `2aab4ac` was pushed to `neelpote/living-vault`. Corrected mainnet navigation's Your collection link to `/mainnet/vault#collection`; it no longer sends users to Testnet. Native owned collection exposes that anchor. Added a keyboard-only Skip to content link and focusable main landmark without changing exhibition design.
