@@ -5,6 +5,7 @@ Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted.
 ## Judging Readiness Update
 
 - Owner subsequently requested a much shorter README. Reduced it from 306 to 73 lines: live links/video, product behavior, oracle trust, all three verified addresses, demo steps, reproducible local setup/checks and essential limitations. Detailed evidence, pitch and credits remain linked in existing documents; no application or contract changes.
+- Owner found the 73-line version too short. Latest README is the middle-ground version: 143 lines, restoring the product story, feature table, F1 records, public proof, architecture diagram, ownership rules, Monad rationale and audience/business direction. Repetitive logs and deep operational details remain in linked documentation.
 
 - Owner supplied prize rubric and a 5:45 PM IST October 10 cutoff. `docs/SUBMISSION.md` maps every criterion to evidence or a clearly outstanding owner action; includes a 90-second pitch mentioning all four eligibility items, live transaction runbook, social draft and demo/ad scripts. No award, social-view count, revenue, customer traction, mainnet or custom-domain claim is made.
 - README now prioritizes the public repo/live site/verified F1 contract, links the submission kit, and distinguishes proposed audience/revenue/validation from measured traction. Default public evidence instructions use the active F1 collection, not burned deposit vault No. 1.
