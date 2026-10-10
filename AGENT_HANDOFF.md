@@ -4,6 +4,8 @@ Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted.
 
 ## Judging Readiness Update
 
+- Owner subsequently requested a much shorter README. Reduced it from 306 to 73 lines: live links/video, product behavior, oracle trust, all three verified addresses, demo steps, reproducible local setup/checks and essential limitations. Detailed evidence, pitch and credits remain linked in existing documents; no application or contract changes.
+
 - Owner supplied prize rubric and a 5:45 PM IST October 10 cutoff. `docs/SUBMISSION.md` maps every criterion to evidence or a clearly outstanding owner action; includes a 90-second pitch mentioning all four eligibility items, live transaction runbook, social draft and demo/ad scripts. No award, social-view count, revenue, customer traction, mainnet or custom-domain claim is made.
 - README now prioritizes the public repo/live site/verified F1 contract, links the submission kit, and distinguishes proposed audience/revenue/validation from measured traction. Default public evidence instructions use the active F1 collection, not burned deposit vault No. 1.
 - Fresh public clone of commit `1a0c961bc0ef96082584b409e89a9e66e7c4311d` in an isolated temp directory: `npm ci` PASS (0 reported vulnerabilities), compilation PASS, 19 contract checks PASS, renderer checks PASS, build PASS, sequential typecheck PASS. Started `npm run dev -- --port 3004`; read-only browser verified homepage and configured F1 gallery with exact source digest match, no environment file/private key. Temporary server stopped; original shared server left running.
