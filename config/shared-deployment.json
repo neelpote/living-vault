@@ -1,0 +1,15 @@
+{
+  "chainId": 10143,
+  "address": "0x0e0596b392a1808f851bf8fa2476b8c59110e949",
+  "oracle": "0x1bA990f986E74295b1a4f65c5d654eBaA6Ee4451",
+  "artist": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+  "transactionHash": "0xee24e78c5a145c592e0cfc4fa2002dbd215def921ac5233aba1ee8f5bb107600",
+  "blockNumber": "69805772",
+  "deployedAt": "2026-10-10T10:50:23.460Z",
+  "verification": {
+    "httpStatus": 200,
+    "response": "{\"success\":true,\"verified\":1,\"total\":2,\"results\":{\"monadvision\":{\"status\":\"failed\",\"message\":\"The recompiled bytecode length doesn't match the onchain bytecode length.\"},\"monadscan\":{\"status\":\"success\",\"message\":\"Pass - Verified\",\"guid\":\"9gt5fnxkpww1g7zurra5knbsyee96x6evre8tzfkjihcsvf6y9\",\"url\":\"https://testnet.monadscan.com/address/0x0e0596b392a1808f851bf8fa2476b8c59110e949\"}}}",
+    "submittedAt": "2026-10-10T10:56:55.787Z",
+    "method": "AST-order-preserving import path aliases; executable bytes locally matched; metadata path hashes differ"
+  }
+}

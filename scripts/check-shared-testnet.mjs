@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createPublicClient,http,keccak256,toHex} from 'viem';
+import {monadTestnet} from 'viem/chains';
+const d=JSON.parse(readFileSync('config/shared-deployment.json'));
+if(d.chainId!==10143||!d.address)throw Error('No confirmed shared Testnet deployment.');
+const abi=JSON.parse(readFileSync('artifacts/SharedLivingArt.json')).abi;
+const oracleAbi=JSON.parse(readFileSync('artifacts/F1LivingArt.json')).abi;
+const client=createPublicClient({chain:monadTestnet,transport:http('https://testnet-rpc.monad.xyz')});
+assert.equal(await client.getChainId(),10143);
+const read=(functionName,args=[])=>client.readContract({address:d.address,abi,functionName,args});
+const oracle=await read('oracle');assert.equal(oracle.toLowerCase(),d.oracle.toLowerCase());
+const receipt=await client.getTransactionReceipt({hash:d.transactionHash});assert.equal(receipt.status,'success');assert.equal(receipt.contractAddress.toLowerCase(),d.address.toLowerCase());
+const artist=await read('artist');assert.equal(artist.toLowerCase(),(await client.getTransaction({hash:d.transactionHash})).from.toLowerCase());
+const svg=await read('compositionSVG');assert.ok(svg.includes('0 0 720 720'));
+const mask=await read('mintedMask');const fragments=[];
+for(let i=0;i<36;i++)if((mask&(1n<<BigInt(i)))!==0n){const id=BigInt(i+1);const uri=await read('tokenURI',[id]);const metadata=JSON.parse(Buffer.from(uri.split(',')[1],'base64'));const piece=Buffer.from(metadata.image.split(',')[1],'base64').toString();assert.equal(piece,await read('pieceSVG',[id]));fragments.push({id,owner:await read('ownerOf',[id]),expression:await read('expression',[id]),digest:keccak256(toHex(piece))});}
+assert.equal(await read('totalSupply'),BigInt(fragments.length));
+const count=await read('proposalCount');const proposals=[];for(let i=1n;i<=count;i++)proposals.push({id:i,...await read('proposalInfo',[i])});
+const oracleRevision=await read('oracleRevision');assert.ok(oracleRevision<=await client.readContract({address:oracle,abi:oracleAbi,functionName:'revision'}));
+const evidence={checkedAt:new Date().toISOString(),chainId:10143,address:d.address,deploymentHash:d.transactionHash,artist,oracle,compositionRevision:await read('compositionRevision'),oracleRevision,sourceHash:await read('sourceHash'),season:await read('season'),round:await read('round'),activePreset:await read('activePreset'),pendingProposal:await read('pendingProposal'),svgDigest:keccak256(toHex(svg)),svgBytes:Buffer.byteLength(svg),fragments,proposals,scope:'Read-only public Testnet observations. An initial deployment is not evidence of a later chapter activation.'};
+writeFileSync('docs/shared-testnet-evidence.json',JSON.stringify(evidence,(_,v)=>typeof v==='bigint'?v.toString():v,2)+'\n');console.log(`PASS public Testnet: contract identity, original composition, ${fragments.length} NFT images and ${proposals.length} commission records.`);

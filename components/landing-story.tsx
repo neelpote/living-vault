@@ -11,6 +11,7 @@ const journey = [
 
 export function LandingStory() {
   return <>
+    <section className="landing-section" aria-labelledby="shared-title"><div className="landing-intro-grid"><h2 id="shared-title">Your fragment.<br/><em>Our composition.</em></h2><div className="landing-copy"><p>Living Together brings 36 ownable fragments into one shared artwork. Holders shape their part, vote on the artist&apos;s next chapter, and let real race results complete its expression.</p><Link href="/together" className="landing-link">Enter Living Together<ArrowUpRight size={20}/></Link></div></div></section>
     <section className="landing-intro landing-section" aria-labelledby="idea-title">
       <span className="landing-label">01 / THE IDEA</span>
       <div className="landing-intro-grid">

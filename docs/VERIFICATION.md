@@ -2,6 +2,14 @@
 
 Checkpoint: 2026-10-10. Values below were observed, not inferred from frontend previews.
 
+## Shared Composition and Voting
+
+`npm run shared:test`: 21 checks passed on isolated local EVM18548 with two genuine Jolpica round15/16 reports. Covers 36-piece bounds, holder expression, artist-only bounded proposals, eligibility snapshot, duplicate votes after transfer, deadline/finalization, zero turnout, deterministic tie, newer-report activation, original metadata and ERC-4906. Browser wallet exercised deployment, claim, edit, propose, vote, finalize and apply; exact fragment pixels matched their full composition crop. Screenshots at1440/768/390/320 show loaded art, no overflow/page errors. Local application3005 and chain shut down; public config preserved. Build/typecheck passed.
+
+User-wallet deployment confirmed: `0x0e0596b392a1808f851bf8fa2476b8c59110e949`, transaction `0xee24e78c5a145c592e0cfc4fa2002dbd215def921ac5233aba1ee8f5bb107600`, block69805772. Public readonly check confirmed fragment1 owned by the deploying wallet with expression2 (Bold), exact NFT image equality, consumed real source hash and initial oracle revision1. [Evidence](shared-testnet-evidence.json). No public post-vote chapter activation is claimed.
+
+Source verification: Monadscan **Pass - Verified**; MonadVision verification failed and is not claimed. Initial full resolved input changed compiler AST allocation compared with the original import-callback build. The verification script derives AST-order-preserving source aliases, changes import paths only, and checks creation/runtime executable bytes (excluding their metadata hash trailers) before submission. Source path hashes differ, so no perfect metadata match is claimed. Original creation calldata independently equals the original artifact plus oracle constructor argument. API response and method are preserved in `config/shared-deployment.json`. Existing contracts and source are unchanged.
+
 ## Actual Monad Testnet Deployment
 
 Chain RPC reports `0x279f` (10143).

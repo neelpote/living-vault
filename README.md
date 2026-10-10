@@ -54,15 +54,26 @@ The F1 collection covers **all 11 teams on the 2026 grid**, including Audi and C
 
 Source: [Jolpica F1 API](https://github.com/jolpica/jolpica-f1/blob/main/docs/README.md). The page links championship years to their source responses and lets anyone download the canonical report. API results may be cached for five minutes; source and published values are shown separately. There is no synthetic result or forced evolution button.
 
+## Shared Art and Community Commissions
+
+[Living Together](https://living-vault-three.vercel.app/together) adds **36 ownable fragments of one shared composition**. Each holder chooses a bounded expression for their fragment; the original NFT image is a crop of the collective on-chain SVG.
+
+The artist proposes three named chapters from nine fixed artistic presets. Existing fragments vote once each; transfers do not reset votes and late claims cannot vote. Anyone can finalize after the deadline. Highest count wins, ties select the earliest option, and zero turnout causes no change.
+
+**A vote alone cannot activate a chapter.** The winner waits for a genuinely newer report from the linked F1 oracle, published after finalization. Anyone can then apply it, updating the whole artwork and its fragments. Voting never changes custody or vault balances. This is NFT-weighted voting, not Sybil-resistant governance.
+
+This extension is deployed as a separate contract; existing vault/F1 contracts are unchanged. Fragment No. 1 is claimed with its holder's Bold expression confirmed on-chain. Public chapter activation is not yet claimed: it needs a newer genuine oracle report. [Shared-art rules](https://living-vault-three.vercel.app/docs#shared-art).
+
 ## Verified Contracts
 
-All three contracts are deployed on **Monad Testnet**, with source verified on MonadVision and Monadscan.
+All four contracts are deployed on **Monad Testnet**. The original three are source-verified on MonadVision and Monadscan; SharedLivingArt is source-verified on Monadscan.
 
 | Contract | Address / Explorer |
 | --- | --- |
 | LivingVault | [`0x760600d4fdd56b49941fa91b096666d56c08ec5f`](https://testnet.monadvision.com/address/0x760600d4fdd56b49941fa91b096666d56c08ec5f) |
 | MockUSDC | [`0x2937e4a29f6a60ee56375f7b3fd9b71542ec6afb`](https://testnet.monadvision.com/address/0x2937e4a29f6a60ee56375f7b3fd9b71542ec6afb) |
 | F1LivingArt | [`0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451`](https://testnet.monadvision.com/address/0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451) |
+| SharedLivingArt | [`0x0e0596b392a1808f851bf8fa2476b8c59110e949`](https://testnet.monadscan.com/address/0x0e0596b392a1808f851bf8fa2476b8c59110e949) |
 
 **Recorded public proof:** a deposit vault was minted and topped up twice, with accounting and SVG mutation checked against the deployed renderer. The separate F1 contract published the real round-16 report at deployment; all 11 team values were independently checked, and Ferrari NFT No. 1's image matched the original contract SVG.
 
@@ -130,6 +141,8 @@ Fresh-clone setup, 19 contract checks, build and typecheck passed. Recorded brow
 
 For the wallet browser suite, run `npx playwright install chromium`, then `npm run test:e2e`. For the F1 suite, keep the development server running and run `npm run f1:test`. Both use isolated local chains, not public signing keys. GitHub Actions is configured for clean installation, contract tests, build and typecheck.
 
+Shared collection: `npm run shared:test` passed 21 local contract/browser checks with two real race reports, including vote-to-event activation and exact fragment crop pixels. `npm run shared:check` verifies the actual public deployment, ownership and original NFT images. [Shared Testnet evidence](docs/shared-testnet-evidence.json).
+
 ## Who It Is For
 
 Artists and sports communities can use living collectibles to express ongoing participation rather than a static purchase. The proposed revenue model is **commissioned collections and optional hosted publishing services**, not returns on deposited funds.
@@ -138,6 +151,6 @@ Next validation steps are community interviews, artist-led pilots, and measuring
 
 ## Scope and Further Reading
 
-**Testnet only.** mUSDC has no monetary value or yield. No mainnet deployment or community voting. F1 updates require the reporter; API failures never substitute fabricated results.
+**Testnet only.** mUSDC has no monetary value or yield. No mainnet deployment. F1 updates require the reporter; API failures never substitute fabricated results. A voted chapter may wait until the next genuine result is published.
 
 [Platform Guide](https://living-vault-three.vercel.app/docs) · [Verification & Evidence](docs/VERIFICATION.md) · [Pitch & Submission Kit](docs/SUBMISSION.md) · [Artwork Credits](docs/ARTWORK_CREDITS.md) · [Agent Handoff](AGENT_HANDOFF.md)

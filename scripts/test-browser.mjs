@@ -28,8 +28,8 @@ try {
   if (!process.env.TEST_BASE_URL) {
     // Isolate generated test addresses from the user's real deployment and running app.
     appDirectory = mkdtempSync(path.join(tmpdir(), 'living-vault-browser-'));
-    for (const entry of ['app', 'components', 'lib', 'public', 'package.json', 'tsconfig.json', 'next.config.ts', 'next-env.d.ts']) cpSync(entry, path.join(appDirectory, entry), { recursive: true });
-    mkdirSync(path.join(appDirectory, 'config'));
+    for (const entry of ['app', 'components', 'lib', 'public', 'config', 'package.json', 'tsconfig.json', 'next.config.ts', 'next-env.d.ts']) cpSync(entry, path.join(appDirectory, entry), { recursive: true });
+    mkdirSync(path.join(appDirectory, 'config'), {recursive:true});
     writeFileSync(path.join(appDirectory, 'config/deployment.json'), JSON.stringify({ chainId: 10143, mockUSDC: null, livingVault: null, blockNumber: null, deployedAt: null, verification: {} }));
     symlinkSync(path.resolve('node_modules'), path.join(appDirectory, 'node_modules'));
     appServer = spawn('node', [path.resolve('node_modules/next/dist/bin/next'), 'dev', '--webpack', '--hostname', '127.0.0.1', '--port', '3001'], { cwd: appDirectory, stdio: 'ignore' });

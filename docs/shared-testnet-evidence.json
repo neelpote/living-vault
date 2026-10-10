@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-10T11:00:47.497Z",
+  "chainId": 10143,
+  "address": "0x0e0596b392a1808f851bf8fa2476b8c59110e949",
+  "deploymentHash": "0xee24e78c5a145c592e0cfc4fa2002dbd215def921ac5233aba1ee8f5bb107600",
+  "artist": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+  "oracle": "0x1bA990f986E74295b1a4f65c5d654eBaA6Ee4451",
+  "compositionRevision": "5",
+  "oracleRevision": "1",
+  "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+  "season": 2026,
+  "round": 16,
+  "activePreset": 0,
+  "pendingProposal": "0",
+  "svgDigest": "0x8183eacc516f7728a4437b28dbbd207576ea7787895e150de6eea4ab7f9ad734",
+  "svgBytes": 10869,
+  "fragments": [
+    {
+      "id": "1",
+      "owner": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+      "expression": 0,
+      "digest": "0x7d0e3ed89fbcdeed6ae0d6d7000004003b9dee19a6983e765a7650a98389f9dd"
+    }
+  ],
+  "proposals": [],
+  "scope": "Read-only public Testnet observations. An initial deployment is not evidence of a later chapter activation."
+}

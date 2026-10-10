@@ -17,7 +17,7 @@ Evidence date: October 10, 2026. The organizer's rubric is supplied by the proje
 | --- | --- | --- |
 | Announced functions work | [Verification](VERIFICATION.md), core vault tests, F1 tests and public-chain evidence | Recorded checks pass; external wallet/RPC availability remains a dependency |
 | Live on-chain transaction during demo | Follow the runbook below; show the receipt on the explorer | Must perform during the judged demo; historical receipts do not satisfy this |
-| Explorer source published | All three contracts have successful MonadVision/Monadscan verification responses in public configuration | Verified, not audited |
+| Explorer source published | Original three contracts verified on MonadVision/Monadscan; SharedLivingArt verified on Monadscan at `0x0e0596b392a1808f851bf8fa2476b8c59110e949` | Verified, not audited |
 | Someone else can run it | Clone, `npm ci`, `npm run dev`; public config, no private key required | README instructions; clean-install validation recorded in handoff |
 
 ## Ninety-Second Pitch
@@ -28,7 +28,9 @@ We built two working collections on Monad Testnet. In the deposit collection, a 
 
 The sports collection uses real F1 championship history and race results for all eleven teams. Titles shape its metallic layers, points rotate the composition, and wins change blade orientation. The original SVG is rendered on-chain. You can download the source report and compare its digest and values with the published contract state. This is an explicitly trusted reporter oracle, not a decentralized feed.
 
-Our code is public on GitHub under neelpote/living-vault. The README contains the live URL, contract addresses, and complete local setup. The application is publicly hosted on Vercel. All three contracts are deployed on Monad Testnet with source verified on explorers.
+Living Together adds 36 ownable fragments of one shared composition. Holders shape their own fragment and vote on artist-proposed chapters; a genuinely newer F1 oracle report activates the winner. The public deployment has a claimed fragment, while vote-to-event activation is tested locally using real historical reports, not claimed as a completed public event.
+
+Our code is public on GitHub under neelpote/living-vault. The README contains the live URL, contract addresses, and complete local setup. The application is publicly hosted on Vercel. All four contracts are deployed on Monad Testnet with source published on explorers.
 
 Now I will send a real testnet transaction and show its confirmation and resulting artwork.
 
@@ -120,7 +122,7 @@ Fill only after posting. Record views from the platforms at or before the deadli
 ## Bonus Criteria
 
 - **Mainnet: not deployed.** Current contracts are testnet-only; scripts enforce chain 10143. Do not rush a custody contract holding real money onto mainnet for points. Mainnet needs an explicit separate scope, token model, review, deployment and gas budget. No transaction is authorized by this checklist.
-- **Custom domain: not connected.** Public Vercel hosting already meets base eligibility. A domain requires ownership and DNS access; no domain purchase is assumed.
+- **Custom domain: attached, DNS pending.** `livingvault.pics` and `www.livingvault.pics` are attached to the production Vercel project. The registrar still resolves to a parking IP. Root A `76.76.21.21`, www CNAME `cname.vercel-dns.com`, TTL300/default are accepted settings. Do not claim the custom-domain bonus until public DNS and HTTPS work.
 - **Pre-market fit: hypothesis only.** Target independent artists and sports communities; validate with interviews and pilot usage. No invented users, partners or conversion numbers.
 - **Revenue: proposed services.** Commissioned living collections and optional hosted publishing tools; no current paid customers, fees or yield. Sports branding and commercial data rights require separate review.
 - **Innovation: working evidence.** Two different triggers, on-chain generative SVG, portable vault balance, real source/published comparison and explicit oracle trust. Do not claim world-first or decentralized attestation.

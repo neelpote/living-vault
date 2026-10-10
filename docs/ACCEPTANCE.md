@@ -42,6 +42,6 @@ PASS: deployed code/asset checks, verified source on both explorers, public rend
 - Included P1 transfer and atomic redeem, and P2 log-derived history and exact SVG export/share.
 - Minimum initial deposit: 1 mUSDC; subsequent top-ups may be any positive six-decimal amount.
 - Faucet cooldown: 60 seconds. Claims per address are unrestricted after cooldown; this is intentionally a public test token.
-- The original draft excluded external oracles. The user's later F1 extension supersedes that exclusion for a separate sports collection: real data, custom authorized reporter, on-chain original SVG, source digest and provenance. DAO voting, AI generation, real yield, real USDC and mainnet remain excluded.
+- Later user requests supersede the original oracle/voting exclusions: F1 uses a real-data authorized reporter; Living Together adds a separate shared-fragment collection with artist-proposed bounded chapters, NFT-weighted votes and activation gated by a newer real F1 publication. AI generation, real yield, real USDC and mainnet remain excluded. Separate deployment and validation evidence must be checked before claiming the shared collection is publicly deployed.
 - Website starts as a usable exhibition with interactive labelled artwork study, create action and collection; detail and studio provide working wallet flows.
 - Browser deployment uses user's signer and network guards. CLI deployment is optional.

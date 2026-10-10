@@ -13,6 +13,9 @@
     "f1:test": "node scripts/test-f1.mjs",
     "f1:check": "node scripts/check-f1-testnet.mjs",
     "f1:verify": "node scripts/verify-f1.mjs",
+    "shared:test": "node scripts/test-shared.mjs",
+    "shared:check": "node scripts/check-shared-testnet.mjs",
+    "shared:verify": "node scripts/verify-shared.mjs",
     "test:e2e": "node scripts/test-browser.mjs",
     "chain:local": "hardhat node"
   },
