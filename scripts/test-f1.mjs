@@ -1,0 +1,71 @@
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { readFileSync, mkdirSync, writeFileSync, mkdtempSync, cpSync, symlinkSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { createPublicClient, createWalletClient, http, keccak256, toHex } from 'viem';
+import { hardhat } from 'viem/chains';
+import { chromium } from '@playwright/test';
+import { multicall3Bytecode } from '../node_modules/viem/_esm/constants/contracts.js';
+
+// Both round reports below are real API responses. Local writes are isolated.
+const reportURL = process.env.F1_REPORT_URL || 'http://127.0.0.1:3000/api/f1';
+const response = await fetch(reportURL); if (!response.ok) throw new Error('Run the application before this check.');
+const latest = await response.json(); assert.equal(keccak256(toHex(latest.canonical)), latest.sourceHash);
+const raw = JSON.parse(latest.canonical); assert.equal(raw.champions.length, 68);
+assert.equal(latest.teams.find(t=>t.constructorId==='ferrari').titles,16);
+assert.equal(latest.teams.find(t=>t.constructorId==='mclaren').titles,10);
+assert.equal(latest.teams.find(t=>t.constructorId==='mercedes').titles,8);
+assert.equal(latest.teams.find(t=>t.constructorId==='red_bull').titles,6);
+assert.equal(latest.teams.find(t=>t.constructorId==='williams').titles,9);
+assert.equal(latest.teams.find(t=>t.constructorId==='alpine').titles,0);
+const priorRound = latest.round - 1; assert.ok(priorRound > 0);
+const priorUrl = `https://api.jolpi.ca/ergast/f1/2026/${priorRound}/constructorstandings.json?limit=100`;
+const priorResponse = await fetch(priorUrl,{headers:{'User-Agent':'LivingVault/1.1 (github.com/neelpote/living-vault)'},signal:AbortSignal.timeout(20000)});
+assert.ok(priorResponse.ok);const priorBody=await priorResponse.json();const priorRows=priorBody.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+const earlier={...latest,round:priorRound,observedAt:latest.observedAt-1,teams:latest.teams.map(t=>{const row=priorRows.find(r=>r.Constructor.constructorId===t.constructorId);assert.ok(row);return {...t,pointsMilli:Math.round(Number(row.points)*1000),wins:Number(row.wins),position:Number(row.position)};})};
+const priorCanonical=JSON.stringify({...raw,standings:{url:priorUrl,body:priorBody}});earlier.sourceHash=keccak256(toHex(priorCanonical));
+const contractReport=r=>({season:r.season,round:r.round,throughSeason:r.throughSeason,observedAt:BigInt(r.observedAt),sourceHash:r.sourceHash,results:r.teams.map(t=>({titles:t.titles,lastTitle:t.lastTitle,pointsMilli:t.pointsMilli,wins:t.wins,position:t.position}))});
+const node=spawn('node',['node_modules/hardhat/dist/src/cli.js','node','--port','18547'],{stdio:'ignore'});
+const client=createPublicClient({chain:hardhat,transport:http('http://127.0.0.1:18547',{retryCount:0})});
+const alice='0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';const bob='0x70997970C51812dc3A010C7d01b50e0d17dc79C8';
+const wallet=createWalletClient({chain:hardhat,account:alice,transport:http('http://127.0.0.1:18547')});
+let browser,app,appDirectory;const checks=[];const pass=m=>{checks.push(m);console.log('PASS '+m);};
+try {
+  for(let i=0;i<100;i++){try{await client.getChainId();break;}catch{await new Promise(r=>setTimeout(r,100));}}
+  const multicall = await client.waitForTransactionReceipt({hash:await wallet.sendTransaction({data:multicall3Bytecode})});
+  await client.request({method:'hardhat_setCode',params:['0xcA11bde05977b3631167028862bE2a173976CA11',await client.getCode({address:multicall.contractAddress})]});
+  const artifact=JSON.parse(readFileSync('artifacts/F1LivingArt.json'));
+  const receipt=await client.waitForTransactionReceipt({hash:await wallet.deployContract({...artifact,args:[earlier.teams.map(t=>({constructorId:t.constructorId,name:t.name,color:t.color})),contractReport(earlier)]})});assert.equal(receipt.status,'success');const address=receipt.contractAddress;
+  const read=(functionName,args=[])=>client.readContract({address,abi:artifact.abi,functionName,args});
+  const write=async(functionName,args=[],account=alice)=>{const tx=await client.simulateContract({address,abi:artifact.abi,functionName,args,account});const r=await client.waitForTransactionReceipt({hash:await wallet.writeContract({...tx.request,account})});assert.equal(r.status,'success');return r;};
+  assert.equal(await read('teamCount'),11n);assert.equal(await read('reporter'),alice);assert.equal(await read('sourceHash'),earlier.sourceHash);pass('all 11 real teams and report digest initialized');
+  await assert.rejects(()=>write('publish',[contractReport(latest)],bob));pass('unauthorized reporter rejected');
+  await assert.rejects(()=>write('publish',[contractReport(earlier)]));pass('duplicate / stale publication rejected');
+  await assert.rejects(()=>write('publish',[{...contractReport(latest),results:[]} ]));pass('incomplete report rejected');
+  await assert.rejects(()=>write('publish',[{...contractReport(latest),observedAt:9999999999n} ]));pass('future observations rejected');
+  await assert.rejects(()=>write('mint',[99n]));pass('unknown team mint rejected');
+  const team=latest.teams.findIndex(t=>t.constructorId==='ferrari');await write('mint',[BigInt(team)]);assert.equal(await read('ownerOf',[1n]),alice);const old=await read('tokenURI',[1n]);pass('NFT minted with original on-chain SVG');
+  await write('safeTransferFrom',[alice,bob,1n]);assert.equal(await read('ownerOf',[1n]),bob);assert.equal(await read('tokenURI',[1n]),old);pass('transfer preserves team linkage and metadata');
+  const publication=await write('publish',[contractReport(latest)]);assert.notEqual(await read('tokenURI',[1n]),old);assert.equal(await read('sourceHash'),latest.sourceHash);assert.equal(await read('round'),latest.round);assert.ok(publication.logs.some(l=>l.topics[0]===keccak256(toHex('BatchMetadataUpdate(uint256,uint256)'))));pass('two real race reports mutate transferred NFT and emit ERC-4906');
+  await assert.rejects(()=>write('publish',[contractReport(earlier)]));pass('older race report cannot roll back state');
+  const svg=await read('teamSVG',[BigInt(team)]);const metadata=JSON.parse(Buffer.from((await read('tokenURI',[1n])).split(',')[1],'base64'));assert.equal(Buffer.from(metadata.image.split(',')[1],'base64').toString(),svg);assert.equal(metadata.attributes[0].value,16);pass('NFT image exactly matches oracle renderer and real championship count');
+  mkdirSync('test-results',{recursive:true});writeFileSync('test-results/f1-ferrari.svg',svg);
+  appDirectory=mkdtempSync(path.join(tmpdir(),'living-vault-f1-'));
+  for(const entry of ['app','components','lib','public','config','package.json','tsconfig.json','next.config.ts','next-env.d.ts'])cpSync(entry,path.join(appDirectory,entry),{recursive:true});
+  writeFileSync(path.join(appDirectory,'config/f1-deployment.json'),JSON.stringify({chainId:10143,address:null,transactionHash:null}));
+  writeFileSync(path.join(appDirectory,'config/deployment.json'),JSON.stringify({chainId:10143,mockUSDC:null,livingVault:null,blockNumber:null,deployedAt:null}));
+  symlinkSync(path.resolve('node_modules'),path.join(appDirectory,'node_modules'));
+  app=spawn('node',[path.resolve('node_modules/next/dist/bin/next'),'dev','--webpack','--hostname','127.0.0.1','--port','3002'],{cwd:appDirectory,stdio:'ignore'});
+  for(let i=0;i<150;i++){try{if((await fetch('http://127.0.0.1:3002/f1')).ok)break;}catch{}await new Promise(r=>setTimeout(r,200));}
+  browser=await chromium.launch();const context=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+  await context.route(/https:\/\/.*(monad|monadinfra|monad\.xyz).*/,async route=>{const payload=route.request().postDataJSON();const rpc=async p=>p.method==='eth_chainId'?{jsonrpc:'2.0',id:p.id,result:'0x279f'}:await(await fetch('http://127.0.0.1:18547',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)})).json();const output=Array.isArray(payload)?await Promise.all(payload.map(rpc)):await rpc(payload);await route.fulfill({json:output,headers:{'access-control-allow-origin':'*'}});});
+  await context.route('**/api/f1',route=>route.fulfill({json:latest}));
+  await context.addInitScript(d=>localStorage.setItem('living-vault-f1',JSON.stringify(d)),{chainId:10143,address});
+  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:3002/f1',{waitUntil:'networkidle'});try{await page.locator('.f1-canvas img').waitFor({timeout:30000});}catch(error){console.log(await page.locator('main').innerText());console.log(errors);await page.screenshot({path:'test-results/f1-failed.png',fullPage:true});throw error;}assert.equal(await page.locator('tbody tr').count(),11);assert.equal(await page.locator('.f1-title-total strong').innerText(),'16');pass('gallery reads real source and published contract data');
+  await page.locator('.f1-canvas').screenshot({path:'test-results/f1-ferrari.png'});
+  const first=await page.locator('.f1-canvas img').getAttribute('src');await page.locator('#f1-team').selectOption(String(latest.teams.findIndex(t=>t.constructorId==='mercedes')));await page.waitForFunction(first=>{const i=document.querySelector('.f1-canvas img');return i?.getAttribute('src')!==first&&i?.complete&&i?.naturalWidth>0;},first);assert.equal(await page.locator('.f1-title-total strong').innerText(),'8');pass('team selection changes original contract artwork and title count');
+  for(const width of [1440,768,390,320]){await page.setViewportSize({width,height:1000});await page.locator('.f1-canvas img').waitFor();await page.screenshot({path:`test-results/f1-${width}.png`,fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.equal(await page.locator('.f1-canvas img').evaluate(i=>i.complete&&i.naturalWidth>0),true);}assert.deepEqual(errors,[]);pass('desktop and mobile artwork loads without overflow or page errors');
+  writeFileSync('test-results/f1-report.json',JSON.stringify({checks,sourceHash:latest.sourceHash,priorSource:priorUrl,scope:'Local chain only; real Jolpica reports. No public-chain transaction.'},null,2));
+} finally {await browser?.close();app?.kill('SIGTERM');node.kill('SIGTERM');if(appDirectory)rmSync(appDirectory,{recursive:true,force:true});}

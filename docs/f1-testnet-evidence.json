@@ -1,0 +1,174 @@
+{
+  "checkedAt": "2026-10-10T10:07:14.369Z",
+  "chainId": 10143,
+  "address": "0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451",
+  "reporter": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+  "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+  "revision": "1",
+  "season": 2026,
+  "round": 16,
+  "throughSeason": 2025,
+  "deploymentHash": "0x0a6302a849fd74cc86a294881a47708ee15cedbc4082ecc9cfbc918dd90f12db",
+  "totalSupply": "1",
+  "nft": {
+    "id": "1",
+    "owner": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+    "name": "Living F1 / Ferrari / No. 1"
+  },
+  "teams": [
+    {
+      "constructorId": "alpine",
+      "titles": 0,
+      "years": [],
+      "pointsMilli": 68000,
+      "wins": 0,
+      "svgDigest": "0xb32192f2706444de515e41f2bd7dafa315b36e9ab2b78a53d837641abaac46d4",
+      "svgBytes": 4564
+    },
+    {
+      "constructorId": "aston_martin",
+      "titles": 0,
+      "years": [],
+      "pointsMilli": 7000,
+      "wins": 0,
+      "svgDigest": "0xba6fbf8bec66ad02dcfb6f7fd7476412fad5a37832c5a7fb2de27bd5902bcfee",
+      "svgBytes": 4554
+    },
+    {
+      "constructorId": "audi",
+      "titles": 0,
+      "years": [],
+      "pointsMilli": 17000,
+      "wins": 0,
+      "svgDigest": "0x995144a2236e005799cebf673ce1d9df55a0de5235adae4e96a359988e92e8f3",
+      "svgBytes": 4536
+    },
+    {
+      "constructorId": "cadillac",
+      "titles": 0,
+      "years": [],
+      "pointsMilli": 0,
+      "wins": 0,
+      "svgDigest": "0xdb1338d3333b2f5015898338b28a55cd13d117ff17fdafa7fdd5a0cf5bd35dcb",
+      "svgBytes": 4565
+    },
+    {
+      "constructorId": "ferrari",
+      "titles": 16,
+      "years": [
+        1961,
+        1964,
+        1975,
+        1976,
+        1977,
+        1979,
+        1982,
+        1983,
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2007,
+        2008
+      ],
+      "pointsMilli": 405000,
+      "wins": 2,
+      "svgDigest": "0x7a17a917def9533f05183de80260dabb60c8dbf74e24af91c4793d7b510d4b3c",
+      "svgBytes": 11713
+    },
+    {
+      "constructorId": "haas",
+      "titles": 0,
+      "years": [],
+      "pointsMilli": 27000,
+      "wins": 0,
+      "svgDigest": "0x3ecd6409107b101019078eb074dadfe88ea128a67229198654c561c9a5231ee3",
+      "svgBytes": 4560
+    },
+    {
+      "constructorId": "mclaren",
+      "titles": 10,
+      "years": [
+        1974,
+        1984,
+        1985,
+        1988,
+        1989,
+        1990,
+        1991,
+        1998,
+        2024,
+        2025
+      ],
+      "pointsMilli": 316000,
+      "wins": 2,
+      "svgDigest": "0xaf6b1977b4cfe3e7406278fc8b81cec8f1000cd40f006b76e377cfd1ee6d3be0",
+      "svgBytes": 8844
+    },
+    {
+      "constructorId": "mercedes",
+      "titles": 8,
+      "years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "pointsMilli": 556000,
+      "wins": 11,
+      "svgDigest": "0x45248d1aded394a7fd8d19fabec68a974eb37d4d4a6532cf6d83f032a6fa9bbc",
+      "svgBytes": 7417
+    },
+    {
+      "constructorId": "rb",
+      "titles": 0,
+      "years": [],
+      "pointsMilli": 90000,
+      "wins": 0,
+      "svgDigest": "0x6711e67c80f54c4d96fc85e3ab62545b3ee91e05c31aa4c0dfd28abece03aa3b",
+      "svgBytes": 4556
+    },
+    {
+      "constructorId": "red_bull",
+      "titles": 6,
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2022,
+        2023
+      ],
+      "pointsMilli": 298000,
+      "wins": 1,
+      "svgDigest": "0x5d2151366e60c7ac6773d8df78c0d8121bb6d338731ef8debfa9fd360019de80",
+      "svgBytes": 7415
+    },
+    {
+      "constructorId": "williams",
+      "titles": 9,
+      "years": [
+        1980,
+        1981,
+        1986,
+        1987,
+        1992,
+        1993,
+        1994,
+        1996,
+        1997
+      ],
+      "pointsMilli": 12000,
+      "wins": 0,
+      "svgDigest": "0x1333f093d5f2f990007a8537f804eb26d7b61f6da65c78d5be1ecf9dfdc9b3e8",
+      "svgBytes": 8848
+    }
+  ],
+  "scope": "Public-chain reads and confirmed deployment. Exact raw report hash and derived team data compared. No oracle update or mint is signed by this script."
+}

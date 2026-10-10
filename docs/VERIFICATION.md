@@ -69,6 +69,14 @@ The user saw MetaMask `Cannot read properties of undefined (reading 'origin')` w
 
 ## Remaining Validation Limits
 
+## F1 Oracle Extension
+
+Public check at `2026-10-10T10:07:14.369Z` passed against real Monad Testnet, chain 10143. Contract: `0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451`. Deployment: `0x0a6302a849fd74cc86a294881a47708ee15cedbc4082ecc9cfbc918dd90f12db`. Source verified by MonadVision (perfect match) and Monadscan (Pass - Verified), HTTP 200, verified 2/2. Configuration retains exact constructor/latest reports and verification response.
+
+All11 team identities, championship counts/last title, current points/wins/positions and original SVGs were independently compared against the canonical Jolpica source report. Digest: `0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55`; season2026 round16, championship history through2025, oracle revision1. Public totalSupply1: Ferrari NFT No.1 owned by the user's wallet. Decoded NFT SVG exactly equals the contract's teamSVG. Full record: `docs/f1-testnet-evidence.json`.
+
+14 local checks passed using actual race-round15 and round16 source responses; their publication changes an already-transferred NFT's tokenURI. Includes unauthorized/stale/future/incomplete rejection and responsive original-art gallery at1440/768/390/320. These receipts are local-only. Public post-deployment oracle update has not been observed; unchanged current data is not republished to manufacture evolution. This is a single trusted reporter, not decentralized consensus or HTTP attestation, and no unattended publisher is claimed.
+
 ### Later Repository Preparation Check (2026-10-10)
 
 A read-only public RPC check during GitHub preparation returned `totalSupply() = 0`, `nextTokenId() = 2`, and a reverted `ownerOf(1)`. The hosted detail page reports vault No. 1 redeemed. The mint/two-top-up evidence above remains a historical checkpoint; no active NFT is claimed at this later check. A redemption transaction hash and payout receipt were not independently inspected. Create and evolve a fresh token for a live demo; pass its ID to `npm run test:testnet -- <token-id>` when refreshing evidence. Do not overwrite historical evidence with inferred values.

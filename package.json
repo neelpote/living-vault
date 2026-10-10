@@ -10,6 +10,9 @@
     "contracts:deploy": "node --env-file-if-exists=.env.local scripts/deploy.mjs",
     "contracts:verify": "node scripts/verify.mjs",
     "test:testnet": "node scripts/check-testnet.mjs",
+    "f1:test": "node scripts/test-f1.mjs",
+    "f1:check": "node scripts/check-f1-testnet.mjs",
+    "f1:verify": "node scripts/verify-f1.mjs",
     "test:e2e": "node scripts/test-browser.mjs",
     "chain:local": "hardhat node"
   },

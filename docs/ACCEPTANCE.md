@@ -42,6 +42,6 @@ PASS: deployed code/asset checks, verified source on both explorers, public rend
 - Included P1 transfer and atomic redeem, and P2 log-derived history and exact SVG export/share.
 - Minimum initial deposit: 1 mUSDC; subsequent top-ups may be any positive six-decimal amount.
 - Faucet cooldown: 60 seconds. Claims per address are unrestricted after cooldown; this is intentionally a public test token.
-- No external oracle, DAO vote, AI art generator, real yield, real USDC or mainnet deployment. Those are explicitly excluded by this PRD.
+- The original draft excluded external oracles. The user's later F1 extension supersedes that exclusion for a separate sports collection: real data, custom authorized reporter, on-chain original SVG, source digest and provenance. DAO voting, AI generation, real yield, real USDC and mainnet remain excluded.
 - Website starts as a usable exhibition with interactive labelled artwork study, create action and collection; detail and studio provide working wallet flows.
 - Browser deployment uses user's signer and network guards. CLI deployment is optional.

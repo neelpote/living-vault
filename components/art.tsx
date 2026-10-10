@@ -36,7 +36,7 @@ export function Exhibition() {
     </div>
     <div className="exhibition-bottom">
       <div className="exhibition-note"><span className="eyebrow">A LIVING COLLECTION</span><p>A deposit becomes a brushstroke.<br/>A vault becomes a work of art.</p></div>
-      <div className="demo-controls museum-links"><div><span className="eyebrow">THE LIVING COLLECTION</span><a href="/vault/1">View evolving vault No. 001<ArrowUpRight size={15}/></a></div><a href="/docs#art-credits" className="museum-credits-link">Art credits<ArrowUpRight size={12}/></a></div>
+      <div className="demo-controls museum-links"><div><span className="eyebrow">THE ORACLE COLLECTION</span><a href="/f1">Explore real F1 artwork<ArrowUpRight size={15}/></a></div><a href="/docs#art-credits" className="museum-credits-link">Art credits<ArrowUpRight size={12}/></a></div>
       <a href="/create" className="exhibition-cta"><span>Create your vault</span><ArrowRight size={32}/></a>
     </div>
   </section>;

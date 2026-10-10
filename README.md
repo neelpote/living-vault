@@ -4,7 +4,7 @@
 
 A generative NFT with a deposit vault inside it. Add test tokens, watch the artwork evolve, and carry the balance and its history with the NFT when ownership changes.
 
-**[Open the live app](https://living-vault-three.vercel.app) · [Create your own piece](https://living-vault-three.vercel.app/create) · [Read the platform guide](https://living-vault-three.vercel.app/docs)**
+**[Open the live app](https://living-vault-three.vercel.app) · [Real F1 oracle artwork](https://living-vault-three.vercel.app/f1) · [Create a deposit vault](https://living-vault-three.vercel.app/create) · [Read the platform guide](https://living-vault-three.vercel.app/docs)**
 
 Built and deployed on **Monad Testnet, chain 10143**. This edition uses **mUSDC, a free test token with no monetary value or yield**. No mainnet deployment is included.
 
@@ -19,6 +19,7 @@ Living Vault turns an evolving collectible into a working ownership loop: **depo
 | The exhibition | [Live homepage](https://living-vault-three.vercel.app) | Museum-inspired typography, paintings, evolution studies and the product story |
 | On-chain evolution proof | [Recorded vault No. 1 evidence](docs/testnet-evidence.json) | Confirmed mint and deposits, principal, image digests and renderer equality |
 | Interactive demo | [Create a vault](https://living-vault-three.vercel.app/create) | Claim test tokens, mint, then deposit again to evolve your own piece |
+| Real-world data | [F1 oracle collection](https://living-vault-three.vercel.app/f1) | All 11 teams, source/published comparisons, original on-chain turbine artwork and free NFT mint |
 | Platform guide | [Documentation](https://living-vault-three.vercel.app/docs) | Lifecycle, contracts, economics, provenance, troubleshooting and FAQ |
 | Evidence | [Verification record](docs/VERIFICATION.md) | Public transaction hashes, source verification and exact testing limits |
 
@@ -98,6 +99,39 @@ At the recorded RPC checkpoint, **2026-10-10 07:35:13 UTC**, vault No. 1 held **
 [Machine-readable evidence](docs/testnet-evidence.json) records receipt blocks, amounts, owner, custody balance, SVG digests and renderer equality. [Verification details](docs/VERIFICATION.md) distinguish public observations from local tests. Source verification is not a security audit.
 
 **Current demo state:** a fresh RPC check on October 10 found total supply **0**, next token ID **2**, and a reverted ownership lookup for previously minted vault No. 1. The hosted page also reports it as redeemed. Its mint/evolution evidence remains valid as a historical checkpoint, but it is no longer an active demo NFT. Create a fresh vault to demonstrate evolution. The old-vault evidence command will fail for burned No. 1; for a new evolved token, run `npm run test:testnet -- <token-id>`.
+
+## F1 Sports Oracle Collection
+
+The platform now includes a separate [F1 collection](https://living-vault-three.vercel.app/f1): original on-chain metallic turbine artwork driven by real Constructors' Championship history and race standings. The deposit vault is immutable, so this feature uses a new oracle-enabled ERC-721 contract rather than changing the old vault's metadata or custody.
+
+![Ferrari artwork read from the deployed Monad Testnet oracle](docs/images/f1-real.png)
+
+- **All 11 teams on the 2026 grid**, including Audi and Cadillac.
+- **Actual championship records**, computed from 68 completed-season champion responses, 1958-2025. Every championship year links to its source. Exact constructor identity is used; predecessor titles are not inherited.
+- Ferrari **16**, McLaren **10**, Williams **9**, Mercedes **8**, Red Bull **6**; the other 2026 identities have **0** through 2025.
+- Current 2026 points, wins and positions are fetched from Jolpica. A current-season title is counted only after the final scheduled race's results are present and its date has passed.
+- The oracle publishes counts, points, wins, season, round, timestamp and a **Keccak-256 digest of the canonical raw source report**.
+- The NFT's actual `tokenURI` consumes that published state. Titles shape the turbine layers, points rotate it, wins adjust blade orientation. ERC-4906 notifies consumers when published data changes.
+- SVG export downloads the actual contract output, not a browser replacement. NFT minting is free apart from test MON gas and carries no mUSDC vault balance.
+
+**Trust model:** this is a custom **single-reporter push oracle**, not a decentralized consensus network. The immutable deploying wallet is authorized to publish reports. Anyone can download the raw source report, recompute its digest and compare it to the contract, but the digest does not cryptographically attest the truth of HTTP data. Source and published values are shown separately. The app never substitutes fabricated data when the API fails, never publishes from an unauthorized browser, and disables unchanged report publications. No synthetic event or forced evolution button is included.
+
+Source: [Jolpica API documentation](https://github.com/jolpica/jolpica-f1/blob/main/docs/README.md). Raw historical responses are in [config/f1-history.json](config/f1-history.json); current source reports can be downloaded from the F1 page. The API caches responses for up to five minutes. **Fresh reports require the reporter to publish a wallet transaction**; this edition does not claim an unattended updater.
+
+**Public deployment confirmed:** [F1LivingArt oracle and collection](https://testnet.monadvision.com/address/0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451) at `0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451`, with MonadVision perfect match and Monadscan Pass - Verified. [Deployment receipt](https://testnet.monadvision.com/tx/0x0a6302a849fd74cc86a294881a47708ee15cedbc4082ecc9cfbc918dd90f12db). The real 2026 round-16 report was published in its constructor. Public reads independently checked all 11 team values and SVGs against the raw report. **Ferrari NFT No. 1 is minted** and its metadata image exactly matches the contract renderer. See [F1 evidence](docs/f1-testnet-evidence.json) and [public configuration/report](config/f1-deployment.json).
+
+The published report digest is `0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55`. Download a report and recompute `keccak256(toHex(report.canonical))` to verify its bytes, then compare its derived counts/points/wins against `teamInfo`. `node scripts/check-f1-testnet.mjs` performs those comparisons and checks original NFT image equality. A live post-deployment oracle update has not been observed yet: unchanged round-16 data is not republished to manufacture a mutation. The real round-15 → round-16 mutation is tested on an isolated local EVM.
+
+To deploy your own edition, open `/f1` locally with a funded testnet wallet and choose **Deploy F1 oracle & collection** before setting a shared F1 address. Local development persists checked configuration. The deploying wallet becomes the immutable reporter; subsequent real updates require its signature. The current public edition already has a configured address and does not offer replacement deployment.
+
+Additional check (with the development server running):
+
+```sh
+npm run contracts:compile
+node scripts/test-f1.mjs
+```
+
+This check uses **two real 2026 race reports** on a local EVM at port 18547, verifying data counts, reporter authorization, stale/future/incomplete rejection, mint, transfer, oracle-driven NFT mutation, original SVG equality and responsive gallery reads. Local receipts are not public deployment evidence.
 
 ## Why Monad
 
@@ -224,6 +258,7 @@ Vercel explicitly uses Next.js through `vercel.json`. Local persistence/verifica
 | `contracts/LivingVault.sol` | NFT, accounting, authorization, mint/top-up/redemption and metadata |
 | `contracts/VaultRenderer.sol` | Deterministic original on-chain SVG |
 | `contracts/MockUSDC.sol` | Six-decimal test token and faucet |
+| `contracts/F1LivingArt.sol` | Authorized sports oracle, ERC-721 collection and original metallic turbine SVG |
 | `contracts/test/HostileToken.sol` | Adversarial token test fixture |
 | `app/` | Homepage, create, vault, deploy, documentation and local-only helper routes |
 | `components/` | Exhibition, wallet, collection, vault actions and transaction feedback |
@@ -231,6 +266,7 @@ Vercel explicitly uses Next.js through `vercel.json`. Local persistence/verifica
 | `lib/demo-art.ts` | Browser-only sculptural bloom |
 | `lib/generated/`, `public/deploy/` | Generated ABIs and public creation bytecode |
 | `config/deployment.json` | Public addresses and verification responses |
+| `config/f1-deployment.json`, `config/f1-history.json` | F1 public deployment, canonical reports and historical source responses |
 | `scripts/` | Compile, deploy, verify and automated checks |
 | `public/art/` | Renderer previews, manifest and museum images |
 | `docs/` | PRD, acceptance, evidence, credits and README screenshots |
@@ -238,7 +274,7 @@ Vercel explicitly uses Next.js through `vercel.json`. Local persistence/verifica
 
 ## Scope, Credits and Further Reading
 
-This release evolves through **deposits**. Community votes, oracle-fed data, AI image generation, real USDC, interest and mainnet deployment are outside this edition. The [draft PRD](docs/PRD.md) and [acceptance checklist](docs/ACCEPTANCE.md) explain the completed scope.
+The original vault evolves through **deposits**; the separate F1 collection evolves through **published real sports data**. Community votes, AI image generation, real USDC, interest and mainnet deployment remain outside this edition. The [draft PRD](docs/PRD.md) and [acceptance checklist](docs/ACCEPTANCE.md) explain the scope; the F1 feature is a later user-requested extension.
 
 Original contract SVGs, bloom presentation and documentation landscape illustrations are generated by project code. Museum sources and artist credits are in [Artwork Credits](docs/ARTWORK_CREDITS.md). Fonts use Google Fonts; icons use Lucide. Third-party assets and libraries retain their respective licenses.
 

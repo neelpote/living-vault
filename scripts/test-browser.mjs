@@ -84,7 +84,7 @@ try {
   mkdirSync('test-results', { recursive: true });
   await page.goto(baseURL, { waitUntil: 'networkidle' });
   await page.screenshot({ path: 'test-results/home-desktop.png', fullPage: true });
-  assert.equal(await page.getByRole('link', { name: 'View evolving vault No. 001' }).getAttribute('href'), '/vault/1'); pass('museum exhibition links to the live evolving vault');
+  assert.equal(await page.getByRole('link', { name: 'Explore real F1 artwork' }).first().getAttribute('href'), '/f1'); pass('museum exhibition links to the real F1 oracle collection');
   await page.getByRole('button', { name: 'Connect wallet' }).first().click();
   await page.getByRole('button', { name: 'MetaMask', exact: true }).click();
   await page.waitForFunction(() => !document.querySelector('dialog'));
