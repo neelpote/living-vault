@@ -4,6 +4,12 @@ Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted.
 
 ## Mainnet Deployment (Confirmed)
 
+### Compact Explorer Actions (Latest)
+
+- User requested a specific transaction button instead of the long native contract address below the network notice. Replaced raw address with View deployment transaction (actual deployment hash) and separate View contract link on both native mint and detail pages. This is the deployment transaction, not a user's mint/top-up; existing receipt panels still link each actual action transaction separately.
+- Responsive wrapped toolbar uses existing button styling. Production mobile screenshot reviewed. `npm run test:public` PASS all11 routes at1440/390/320 with exact native deployment/contract link assertions, image loads, no overflow/page/hydration errors. Build/typecheck PASS. No contract, balance or transaction logic changed.
+- Published `dpl_2on3JiFbG7U2cjZRkbV3QX3wbVGC`, READY, aliased https://livingvault.pics, deployment https://living-vault-fgq4k0awi-neelpote44-7832s-projects.vercel.app. No wallet signing or public writes.
+
 ### Network Home Routing (Latest)
 
 - User requested Mainnet switch open HOME, not F1. `/mainnet` now mirrors the exhibition landing page with mainnet-specific labels, native MON instructions, real owned native vault gallery and mainnet action links. Mainnet F1 moved to `/mainnet/f1`. Network switches always open `/mainnet` or `/`; rejected connected-wallet changes retain current route. Wordmark, exhibition navigation and footer home stay on the selected edition. Updated NFT back links, shared oracle link, docs and README F1 link.

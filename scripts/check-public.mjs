@@ -13,6 +13,10 @@ try{
     assert.equal(await page.evaluate(()=>performance.getEntriesByType('resource').some(r=>/fonts\.(googleapis|gstatic)\.com/.test(r.name))),false,'Fonts must be hosted with the application');
     if(route.includes('/nft/'))await page.locator('.nft-original').waitFor({timeout:45000});
     if(route==='/mainnet/vault')await page.getByRole('button',{name:'Connect wallet',exact:true}).first().waitFor();
+    if(route.startsWith('/mainnet/vault')){
+      assert.equal(await page.getByRole('link',{name:'View deployment transaction',exact:true}).getAttribute('href'),'https://monadvision.com/tx/0x79357b581b8eb3556df8aab9c791e86a623f05fd2c615e4917f29c1a53b89012');
+      assert.equal(await page.getByRole('link',{name:'View contract',exact:true}).getAttribute('href'),'https://monadvision.com/address/0x9a6003f651a04baef93fffc9e853b1fa2cb48d20');
+    }
     if(route==='/mainnet/vault/1')await page.getByRole('heading',{name:'0.01 MON',exact:true}).waitFor({timeout:45000});
     if(route==='/mainnet'){
       await page.getByRole('heading',{name:'LIVING VAULT',exact:true}).waitFor();
