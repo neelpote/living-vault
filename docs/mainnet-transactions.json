@@ -1,0 +1,532 @@
+{
+  "chainId": 143,
+  "checkedAt": "2026-10-10T12:48:13.827Z",
+  "scope": "Read-only successful receipts and decoded events for all three mainnet contracts. No wallet signing. Only event-emitting transactions are included; rejected wallet requests and reverted transactions are not counted.",
+  "fromBlock": "112172507",
+  "toBlock": "112186180",
+  "transactions": [
+    {
+      "transactionHash": "0xc4f096f01779ede507e13e893d04fde5020a94115a4f25565de8347d9eb33b2f",
+      "contract": "F1LivingArt",
+      "address": "0x80c1ec7f551198586c301fa4bdcdcb51505c06f3",
+      "blockNumber": "112172507",
+      "events": [
+        {
+          "name": "OraclePublished",
+          "args": {
+            "revision": "1",
+            "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+            "season": 2026,
+            "round": 16,
+            "throughSeason": 2025,
+            "observedAt": "1791632301"
+          },
+          "logIndex": 100,
+          "data": "0x00000000000000000000000000000000000000000000000000000000000007ea000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000007e9000000000000000000000000000000000000000000000000000000006aca23ad",
+          "topics": [
+            "0x0d0a3408191abe81ad9e1c350a7d828d65d9fade62eb29b055891d359077943c",
+            "0x0000000000000000000000000000000000000000000000000000000000000001",
+            "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0x3ec0325c7656784f1adb4b19e670aeaf26a2ecc2",
+      "transactionTo": null,
+      "action": "deployment",
+      "arguments": [],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T11:38:36.000Z"
+    },
+    {
+      "transactionHash": "0x554c2511409e2bd6bcb5737ecaea3898ed30d0bc83e4f95ada5756b437208f7d",
+      "contract": "F1LivingArt",
+      "address": "0x80c1ec7f551198586c301fa4bdcdcb51505c06f3",
+      "blockNumber": "112177484",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x0000000000000000000000000000000000000000",
+            "to": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+            "tokenId": "1"
+          },
+          "logIndex": 60,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000003ec0325c7656784f1adb4b19e670aeaf26a2ecc2",
+            "0x0000000000000000000000000000000000000000000000000000000000000001"
+          ]
+        },
+        {
+          "name": "TeamMinted",
+          "args": {
+            "tokenId": "1",
+            "teamId": "4",
+            "owner": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2"
+          },
+          "logIndex": 61,
+          "data": "0x",
+          "topics": [
+            "0x87d45d0ec864af63b60312adbd49b099e559651a884196ed81befa677f174c90",
+            "0x0000000000000000000000000000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000000000000000000000000000004",
+            "0x0000000000000000000000003ec0325c7656784f1adb4b19e670aeaf26a2ecc2"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0xc066ac5d385419b1a8c43a0e146fa439837a8b8c",
+      "transactionTo": "0xdb9b1e94b5b69df7e401ddbede43491141047db3",
+      "action": "wallet/router call; see verified contract events",
+      "arguments": [],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T12:03:38.000Z"
+    },
+    {
+      "transactionHash": "0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63",
+      "contract": "NativeLivingVault",
+      "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "blockNumber": "112180639",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x0000000000000000000000000000000000000000",
+            "to": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "tokenId": "1"
+          },
+          "logIndex": 78,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83",
+            "0x0000000000000000000000000000000000000000000000000000000000000001"
+          ]
+        },
+        {
+          "name": "Minted",
+          "args": {
+            "tokenId": "1",
+            "owner": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "amount": "10000000000000000"
+          },
+          "logIndex": 79,
+          "data": "0x000000000000000000000000000000000000000000000000002386f26fc10000",
+          "topics": [
+            "0xc9d0543a84d3510329c0783b91576878ceb484e8699944cb5610c3436b3b8e39",
+            "0x0000000000000000000000000000000000000000000000000000000000000001",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0x3ae38edd6edfd90180ec897cbf0c5ba527459c83",
+      "transactionTo": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "action": "mint",
+      "arguments": [
+        "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83"
+      ],
+      "valueMON": "0.01",
+      "timestamp": "2026-10-10T12:19:31.000Z"
+    },
+    {
+      "transactionHash": "0xe5a8ad2051ccdf792344224b67597cd1b6ddecaef4521124a0fd75f2c457de23",
+      "contract": "SharedLivingArt",
+      "address": "0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e",
+      "blockNumber": "112184400",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x0000000000000000000000000000000000000000",
+            "to": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+            "tokenId": "1"
+          },
+          "logIndex": 64,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000003ec0325c7656784f1adb4b19e670aeaf26a2ecc2",
+            "0x0000000000000000000000000000000000000000000000000000000000000001"
+          ]
+        },
+        {
+          "name": "PieceClaimed",
+          "args": {
+            "tokenId": "1",
+            "owner": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2"
+          },
+          "logIndex": 65,
+          "data": "0x",
+          "topics": [
+            "0xcced38f072f4c86ca85dbc176bf0bf8bbe1a1aa1c5e793a63f221671a4f2976d",
+            "0x0000000000000000000000000000000000000000000000000000000000000001",
+            "0x0000000000000000000000003ec0325c7656784f1adb4b19e670aeaf26a2ecc2"
+          ]
+        },
+        {
+          "name": "CompositionUpdated",
+          "args": {
+            "revision": "2",
+            "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+            "oracleRevision": "1"
+          },
+          "logIndex": 66,
+          "data": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b550000000000000000000000000000000000000000000000000000000000000001",
+          "topics": [
+            "0xfba48c8af184028a9d9d6875c06ae8bb0992ebffbb0806e4957d385ae710c1bf",
+            "0x0000000000000000000000000000000000000000000000000000000000000002"
+          ]
+        },
+        {
+          "name": "BatchMetadataUpdate",
+          "args": {
+            "fromTokenId": "1",
+            "toTokenId": "36"
+          },
+          "logIndex": 67,
+          "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000024",
+          "topics": [
+            "0x6bd5c950a8d8df17f772f5af37cb3655737899cbf903264b9795592da439661c"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0xc066ac5d385419b1a8c43a0e146fa439837a8b8c",
+      "transactionTo": "0xdb9b1e94b5b69df7e401ddbede43491141047db3",
+      "action": "wallet/router call; see verified contract events",
+      "arguments": [],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T12:38:26.000Z"
+    },
+    {
+      "transactionHash": "0xd9cad2f51f58af1914cdb6f87b0d8383ec67f81d5c072fa417e14d5a7c6b4563",
+      "contract": "NativeLivingVault",
+      "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "blockNumber": "112184708",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x0000000000000000000000000000000000000000",
+            "to": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "tokenId": "2"
+          },
+          "logIndex": 250,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83",
+            "0x0000000000000000000000000000000000000000000000000000000000000002"
+          ]
+        },
+        {
+          "name": "Minted",
+          "args": {
+            "tokenId": "2",
+            "owner": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "amount": "10000000000000000"
+          },
+          "logIndex": 251,
+          "data": "0x000000000000000000000000000000000000000000000000002386f26fc10000",
+          "topics": [
+            "0xc9d0543a84d3510329c0783b91576878ceb484e8699944cb5610c3436b3b8e39",
+            "0x0000000000000000000000000000000000000000000000000000000000000002",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0x3ae38edd6edfd90180ec897cbf0c5ba527459c83",
+      "transactionTo": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "action": "mint",
+      "arguments": [
+        "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83"
+      ],
+      "valueMON": "0.01",
+      "timestamp": "2026-10-10T12:39:59.000Z"
+    },
+    {
+      "transactionHash": "0x61ae35f85a96c45696fc48bf602898cb48b2e82573fafa1d1fae71ff90439a7c",
+      "contract": "SharedLivingArt",
+      "address": "0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e",
+      "blockNumber": "112184854",
+      "events": [
+        {
+          "name": "ExpressionChanged",
+          "args": {
+            "tokenId": "1",
+            "expression": 1
+          },
+          "logIndex": 97,
+          "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+          "topics": [
+            "0x0c14542f3ae83920ce436579f30de339212be608189cd0c40e0a24cd65caf8ba",
+            "0x0000000000000000000000000000000000000000000000000000000000000001"
+          ]
+        },
+        {
+          "name": "MetadataUpdate",
+          "args": {
+            "tokenId": "1"
+          },
+          "logIndex": 98,
+          "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+          "topics": [
+            "0xf8e1a15aba9398e019f0b49df1a4fde98ee17ae345cb5f6b5e2c27f5033e8ce7"
+          ]
+        },
+        {
+          "name": "CompositionUpdated",
+          "args": {
+            "revision": "3",
+            "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+            "oracleRevision": "1"
+          },
+          "logIndex": 99,
+          "data": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b550000000000000000000000000000000000000000000000000000000000000001",
+          "topics": [
+            "0xfba48c8af184028a9d9d6875c06ae8bb0992ebffbb0806e4957d385ae710c1bf",
+            "0x0000000000000000000000000000000000000000000000000000000000000003"
+          ]
+        },
+        {
+          "name": "BatchMetadataUpdate",
+          "args": {
+            "fromTokenId": "1",
+            "toTokenId": "36"
+          },
+          "logIndex": 100,
+          "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000024",
+          "topics": [
+            "0x6bd5c950a8d8df17f772f5af37cb3655737899cbf903264b9795592da439661c"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0xb01caea8c6c47bbf4f4b4c5080ca642043359c2e",
+      "transactionTo": "0xdb9b1e94b5b69df7e401ddbede43491141047db3",
+      "action": "wallet/router call; see verified contract events",
+      "arguments": [],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T12:40:43.000Z"
+    },
+    {
+      "transactionHash": "0x9c8fc7f98b96c7eaeec52598d794cfd971fd000beac0771a479323c187c0e69d",
+      "contract": "NativeLivingVault",
+      "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "blockNumber": "112184912",
+      "events": [
+        {
+          "name": "ToppedUp",
+          "args": {
+            "tokenId": "2",
+            "amount": "10000000000000000",
+            "newPrincipal": "20000000000000000",
+            "newTopUpCount": 1
+          },
+          "logIndex": 187,
+          "data": "0x000000000000000000000000000000000000000000000000002386f26fc1000000000000000000000000000000000000000000000000000000470de4df8200000000000000000000000000000000000000000000000000000000000000000001",
+          "topics": [
+            "0xfeb10a715241646d9149e7cdb5e8fef4e5d9545524de8155c9f777326f67950a",
+            "0x0000000000000000000000000000000000000000000000000000000000000002"
+          ]
+        },
+        {
+          "name": "MetadataUpdate",
+          "args": {
+            "tokenId": "2"
+          },
+          "logIndex": 188,
+          "data": "0x0000000000000000000000000000000000000000000000000000000000000002",
+          "topics": [
+            "0xf8e1a15aba9398e019f0b49df1a4fde98ee17ae345cb5f6b5e2c27f5033e8ce7"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0x3ae38edd6edfd90180ec897cbf0c5ba527459c83",
+      "transactionTo": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "action": "topUp",
+      "arguments": [
+        "2"
+      ],
+      "valueMON": "0.01",
+      "timestamp": "2026-10-10T12:41:00.000Z"
+    },
+    {
+      "transactionHash": "0x8441c1f179920cd7257df393130649c10842b42d9d42fa5fccb61bd76b75a613",
+      "contract": "NativeLivingVault",
+      "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "blockNumber": "112184991",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "to": "0x0000000000000000000000000000000000000000",
+            "tokenId": "2"
+          },
+          "logIndex": 97,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000000000000000000000000002"
+          ]
+        },
+        {
+          "name": "Redeemed",
+          "args": {
+            "tokenId": "2",
+            "owner": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "recipient": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "amount": "20000000000000000"
+          },
+          "logIndex": 98,
+          "data": "0x00000000000000000000000000000000000000000000000000470de4df820000",
+          "topics": [
+            "0x18737e07ba2aac9c230bdd7119bde1c2d51cef17a2910224f55819e4b0651ea1",
+            "0x0000000000000000000000000000000000000000000000000000000000000002",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0x3ae38edd6edfd90180ec897cbf0c5ba527459c83",
+      "transactionTo": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+      "action": "redeem",
+      "arguments": [
+        "2"
+      ],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T12:41:24.000Z"
+    },
+    {
+      "transactionHash": "0x6479cc0d5d5a74a83da3122a96d9b0a587da3337a3c2dbb40edd89cf2c617bd5",
+      "contract": "F1LivingArt",
+      "address": "0x80c1ec7f551198586c301fa4bdcdcb51505c06f3",
+      "blockNumber": "112185100",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x0000000000000000000000000000000000000000",
+            "to": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+            "tokenId": "2"
+          },
+          "logIndex": 46,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83",
+            "0x0000000000000000000000000000000000000000000000000000000000000002"
+          ]
+        },
+        {
+          "name": "TeamMinted",
+          "args": {
+            "tokenId": "2",
+            "teamId": "4",
+            "owner": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83"
+          },
+          "logIndex": 47,
+          "data": "0x",
+          "topics": [
+            "0x87d45d0ec864af63b60312adbd49b099e559651a884196ed81befa677f174c90",
+            "0x0000000000000000000000000000000000000000000000000000000000000002",
+            "0x0000000000000000000000000000000000000000000000000000000000000004",
+            "0x0000000000000000000000003ae38edd6edfd90180ec897cbf0c5ba527459c83"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0xc066ac5d385419b1a8c43a0e146fa439837a8b8c",
+      "transactionTo": "0xdb9b1e94b5b69df7e401ddbede43491141047db3",
+      "action": "wallet/router call; see verified contract events",
+      "arguments": [],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T12:41:57.000Z"
+    },
+    {
+      "transactionHash": "0xd9cc03895bfe0bb8a12190acc32fbe4fdc58acac7ae1327a82a2a9384340a4f3",
+      "contract": "SharedLivingArt",
+      "address": "0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e",
+      "blockNumber": "112185419",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": {
+            "from": "0x0000000000000000000000000000000000000000",
+            "to": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+            "tokenId": "2"
+          },
+          "logIndex": 78,
+          "data": "0x",
+          "topics": [
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "0x0000000000000000000000003ec0325c7656784f1adb4b19e670aeaf26a2ecc2",
+            "0x0000000000000000000000000000000000000000000000000000000000000002"
+          ]
+        },
+        {
+          "name": "PieceClaimed",
+          "args": {
+            "tokenId": "2",
+            "owner": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2"
+          },
+          "logIndex": 79,
+          "data": "0x",
+          "topics": [
+            "0xcced38f072f4c86ca85dbc176bf0bf8bbe1a1aa1c5e793a63f221671a4f2976d",
+            "0x0000000000000000000000000000000000000000000000000000000000000002",
+            "0x0000000000000000000000003ec0325c7656784f1adb4b19e670aeaf26a2ecc2"
+          ]
+        },
+        {
+          "name": "CompositionUpdated",
+          "args": {
+            "revision": "4",
+            "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+            "oracleRevision": "1"
+          },
+          "logIndex": 80,
+          "data": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b550000000000000000000000000000000000000000000000000000000000000001",
+          "topics": [
+            "0xfba48c8af184028a9d9d6875c06ae8bb0992ebffbb0806e4957d385ae710c1bf",
+            "0x0000000000000000000000000000000000000000000000000000000000000004"
+          ]
+        },
+        {
+          "name": "BatchMetadataUpdate",
+          "args": {
+            "fromTokenId": "1",
+            "toTokenId": "36"
+          },
+          "logIndex": 81,
+          "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000024",
+          "topics": [
+            "0x6bd5c950a8d8df17f772f5af37cb3655737899cbf903264b9795592da439661c"
+          ]
+        }
+      ],
+      "status": "success",
+      "sender": "0xb01caea8c6c47bbf4f4b4c5080ca642043359c2e",
+      "transactionTo": "0xdb9b1e94b5b69df7e401ddbede43491141047db3",
+      "action": "wallet/router call; see verified contract events",
+      "arguments": [],
+      "valueMON": "0",
+      "timestamp": "2026-10-10T12:43:33.000Z"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-10T12:35:29.801Z",
+  "checkedAt": "2026-10-10T12:45:58.742Z",
   "scope": "Read-only actual Monad Mainnet. No wallet signing or write.",
   "chainId": 143,
   "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
@@ -12,7 +12,7 @@
   "totalPrincipalWei": "10000000000000000",
   "balanceWei": "10000000000000000",
   "totalSupply": "1",
-  "nextTokenId": "2",
+  "nextTokenId": "3",
   "tokens": [
     {
       "id": "1",

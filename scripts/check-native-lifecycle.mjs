@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createPublicClient,http,keccak256,toHex,formatEther} from 'viem';
+import {monad} from 'viem/chains';
+
+const activity=JSON.parse(readFileSync('docs/mainnet-transactions.json'));
+const artifact=JSON.parse(readFileSync('public/deploy/NativeLivingVault.json'));
+const client=createPublicClient({chain:monad,transport:http('https://rpc.monad.xyz')});
+assert.equal(await client.getChainId(),143);
+const id='2';
+const find=name=>activity.transactions.find(t=>t.contract==='NativeLivingVault'&&t.events.some(e=>e.name===name&&e.args.tokenId===id));
+const mint=find('Minted'),topUp=find('ToppedUp'),redeem=find('Redeemed');
+assert.ok(mint&&topUp&&redeem,'A complete public mint/top-up/redemption sequence is required.');
+const event=(t,name)=>t.events.find(e=>e.name===name).args;
+const m=event(mint,'Minted'),t=event(topUp,'ToppedUp'),r=event(redeem,'Redeemed');
+assert.equal(BigInt(m.amount)+BigInt(t.amount),BigInt(t.newPrincipal));
+assert.equal(t.newPrincipal,r.amount);assert.equal(m.owner.toLowerCase(),r.recipient.toLowerCase());
+for(const tx of [mint,topUp,redeem])assert.equal((await client.getTransactionReceipt({hash:tx.transactionHash})).status,'success');
+const before=await client.readContract({address:mint.address,abi:artifact.abi,functionName:'previewSVG',args:[BigInt(id),BigInt(m.amount),0n]});
+const after=await client.readContract({address:mint.address,abi:artifact.abi,functionName:'previewSVG',args:[BigInt(id),BigInt(t.newPrincipal),BigInt(t.newTopUpCount)]});
+assert.notEqual(before,after,'Confirmed top-up must change the original renderer output.');
+const read=functionName=>client.readContract({address:mint.address,abi:artifact.abi,functionName,args:[BigInt(id)]});
+const missing=e=>e.walk?.(cause=>cause.name==='ContractFunctionRevertedError')?.data?.errorName==='ERC721NonexistentToken';
+await assert.rejects(read('ownerOf'),missing);await assert.rejects(read('tokenURI'),missing);
+const proof={chainId:143,checkedAt:new Date().toISOString(),tokenId:id,mintTransaction:mint.transactionHash,topUpTransaction:topUp.transactionHash,redemptionTransaction:redeem.transactionHash,mintedMON:formatEther(BigInt(m.amount)),addedMON:formatEther(BigInt(t.amount)),redeemedMON:formatEther(BigInt(r.amount)),recipient:r.recipient,originalRendererBefore:keccak256(toHex(before)),originalRendererAfter:keccak256(toHex(after)),artworkChanged:true,nftBurned:true,scope:'Read-only successful public receipts and decoded events, principal conservation, distinct original renderer outputs for confirmed states, burned NFT ownership/metadata unavailable. Gas is separate from returned principal. No agent signing.'};
+writeFileSync('docs/native-mainnet-lifecycle.json',JSON.stringify(proof,null,2)+'\n');console.log(JSON.stringify(proof,null,2));

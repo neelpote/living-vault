@@ -4,6 +4,14 @@ Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted.
 
 ## Mainnet Deployment (Confirmed)
 
+### Latest Mainnet Transactions and README Polish
+
+- User reports more mainnet actions and explicitly requested polished README with NO removal of existing information. Kept every existing nonblank README line, adding overview/product table/quick links, shared features, full nine-action transaction ledger, mainnet walkthrough and evidence commands. Older pending statements retained as clearly labeled historical checkpoints, with new status superseding them.
+- `npm run mainnet:activity` scans all three contracts from112172507 through112186180 in100-block RPC batches. Actual RPC rejects larger ranges. Verified successful receipts and exact address/data/topics/logIndex for emitted events. Some art transactions route via0xdb9b1e94b5b69df7e401ddbede43491141047db3; transaction.from is an outer submitter and differs from NFT owner. Never assert router transaction.to equals NFT contract or sender equals owner. Stored `docs/mainnet-transactions.json`; scans cover event-emitting successful actions, not reverted transactions or non-emitting deployments.
+- Native NFT2 mint0.01MON at112184708, top-up0.01MON at112184912, redeemed0.02MON at112184991. Exact hashes in README/ledger. `node scripts/check-native-lifecycle.mjs` PASS principal conservation, receipts, payout owner, different original renderer outputs, burned ownership/metadata unavailable. Evidence `docs/native-mainnet-lifecycle.json`. Live custody sequence NOW confirmed; historical pending statements below no longer current. No agent signing.
+- F1 NFT1 and NFT2 are Ferrari (team4), supply2. Shared fragments1/2 claimed; fragment1 expression1 Flow. Shared supply2/compositionRevision4/proposals0. F1 source remains original real round16 hash, no post-deployment publication or chapter activation. Native current supply1/principal0.01MON/balance0.01MON, NFT1 active/no top-ups, NFT2 burned/nextID3. Fresh mainnet/native checks PASS and evidence refreshed.
+- Documentation-only changes do not require a website redeployment. Current production remains `dpl_2on3JiFbG7U2cjZRkbV3QX3wbVGC`. GitHub README is the requested output. Maintain the 1000+ impressions as team-reported, not independently verified analytics.
+
 ### Compact Explorer Actions (Latest)
 
 - User requested a specific transaction button instead of the long native contract address below the network notice. Replaced raw address with View deployment transaction (actual deployment hash) and separate View contract link on both native mint and detail pages. This is the deployment transaction, not a user's mint/top-up; existing receipt panels still link each actual action transaction separately.

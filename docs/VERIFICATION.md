@@ -2,6 +2,14 @@
 
 Checkpoint: 2026-10-10. Values below were observed, not inferred from frontend previews.
 
+## Latest Mainnet Lifecycle and Community Usage
+
+Read-only scan through block112186180 on2026-10-10: nine successful post-deployment actions across the three mainnet contracts, plus initial F1 publication. All receipts and decoded events are in [mainnet-transactions.json](mainnet-transactions.json); wallet-router transactions retain their outer sender separately from event owners. Exact deployment links remain in README and configs; deployments without emitted events are not counted by the activity scan.
+
+Native MON Vault2: mint0.01MON `0xd9cad2f51f58af1914cdb6f87b0d8383ec67f81d5c072fa417e14d5a7c6b4563`, top-up0.01MON `0x9c8fc7f98b96c7eaeec52598d794cfd971fd000beac0771a479323c187c0e69d`, redeem0.02MON `0x8441c1f179920cd7257df393130649c10842b42d9d42fa5fccb61bd76b75a613`. All successful. Principal conservation, distinct original renderer outputs, payout recipient and burned NFT ownership/metadata checked by `node scripts/check-native-lifecycle.mjs`, [proof](native-mainnet-lifecycle.json). Gas separate from principal. Vault1 remains active with0.01MON, fully backed by0.01MON contract balance; nextTokenId3.
+
+F1 supply2, both Ferrari. Shared supply2; fragment1 changed to Flow. Source digest remains the genuine initial round16 report; proposalCount0. No post-deployment oracle update or chapter activation claimed. Earlier mint/claim-pending and Testnet-only custody statements below are historical, superseded by this checkpoint and the later native vault section. Source verification is still not an independent audit.
+
 ## Actual Mainnet Art Deployment
 
 User-wallet deployments on chain143: F1LivingArt `0x80c1ec7f551198586c301fa4bdcdcb51505c06f3`, transaction `0xc4f096f01779ede507e13e893d04fde5020a94115a4f25565de8347d9eb33b2f`; SharedLivingArt `0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e`, transaction `0x0a52e10d10be6ba410f67b8156b63b2658acadf46908d8a8f3577a96770c6a14`. Both use the same deploying user as immutable reporter/artist; shared links to the new mainnet oracle, never the Testnet address.

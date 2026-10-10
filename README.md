@@ -6,6 +6,16 @@
 
 Public repository: [neelpote/living-vault](https://github.com/neelpote/living-vault). Publicly hosted on Vercel.
 
+**Explore the editions:** [Testnet Home](https://livingvault.pics) · [Mainnet Home](https://livingvault.pics/mainnet) · [MON Vault](https://livingvault.pics/mainnet/vault) · [Mainnet F1](https://livingvault.pics/mainnet/f1) · [Mainnet Living Together](https://livingvault.pics/mainnet/together)
+
+| Experience | What makes it evolve | What ownership means |
+| --- | --- | --- |
+| Living Vault | Confirmed deposits and top-ups | An NFT carries redeemable principal: test mUSDC on Testnet or native MON on Mainnet |
+| F1 Living Art | Published real championship and race reports | A team-linked NFT with original, data-driven on-chain artwork; no deposit balance |
+| Living Together | Holder expression, chapter votes and a newer real oracle report | One of 36 fragments contributing to a collective on-chain composition |
+
+**Read the essentials:** [Features](#what-it-does) · [Contracts](#verified-contracts) · [Mainnet Transactions](#verified-mainnet-activity) · [Try It](#try-it) · [Architecture](#how-it-is-built) · [Run Locally](#run-locally) · [Checks](#check-the-project) · [Audience & Reach](#who-it-is-for)
+
 ![On-chain Ferrari artwork](docs/images/f1-real.png)
 
 ## The Idea
@@ -37,6 +47,8 @@ The deposit UI includes a richer browser presentation; the original-view toggle 
 | Sports collection | Team selection, real records, original on-chain art and free NFT mint |
 | Provenance | Source/published comparisons, report digest, observation time and source links |
 | Transaction feedback | Wallet signature, pending receipt, confirmation and explorer link |
+| Shared composition | 36 ownable fragments, bounded holder expression and exact composition crops |
+| Community commissions | Artist-proposed chapters, NFT-weighted voting and real-event-gated activation |
 
 ## Real F1 Data, Living Artwork
 
@@ -77,7 +89,37 @@ This extension is deployed as a separate contract; existing vault/F1 contracts a
 
 F1LivingArt and NativeLivingVault are verified on MonadVision and Monadscan; SharedLivingArt is verified on Monadscan. The MON vault accepts native MON, not a mainnet mock token.
 
+### Verified Mainnet Activity
+
+**The native MON lifecycle is now demonstrated on mainnet:** mint, top-up evolution, and full redemption. The receipts below were checked directly on chain **143**, not inferred from interface screenshots or local tests. All listed transactions succeeded.
+
+| Experience | Confirmed action | Block | Explorer Receipt |
+| --- | --- | --- | --- |
+| F1 Living Art | Ferrari NFT No. 1 minted | 112177484 | [View transaction](https://monadvision.com/tx/0x554c2511409e2bd6bcb5737ecaea3898ed30d0bc83e4f95ada5756b437208f7d) |
+| MON Vault | No. 1 minted with **0.01 MON** | 112180639 | [View transaction](https://monadvision.com/tx/0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63) |
+| Living Together | Fragment No. 1 claimed | 112184400 | [View transaction](https://monadvision.com/tx/0xe5a8ad2051ccdf792344224b67597cd1b6ddecaef4521124a0fd75f2c457de23) |
+| MON Vault | No. 2 minted with **0.01 MON** | 112184708 | [View transaction](https://monadvision.com/tx/0xd9cad2f51f58af1914cdb6f87b0d8383ec67f81d5c072fa417e14d5a7c6b4563) |
+| Living Together | Fragment No. 1 changed to **Flow** | 112184854 | [View transaction](https://monadvision.com/tx/0x61ae35f85a96c45696fc48bf602898cb48b2e82573fafa1d1fae71ff90439a7c) |
+| MON Vault | No. 2 topped up by **0.01 MON**, reaching **0.02 MON** and one evolution | 112184912 | [View transaction](https://monadvision.com/tx/0x9c8fc7f98b96c7eaeec52598d794cfd971fd000beac0771a479323c187c0e69d) |
+| MON Vault | No. 2 redeemed: **0.02 MON** principal returned to its owner and NFT burned | 112184991 | [View transaction](https://monadvision.com/tx/0x8441c1f179920cd7257df393130649c10842b42d9d42fa5fccb61bd76b75a613) |
+| F1 Living Art | Ferrari NFT No. 2 minted | 112185100 | [View transaction](https://monadvision.com/tx/0x6479cc0d5d5a74a83da3122a96d9b0a587da3337a3c2dbb40edd89cf2c617bd5) |
+| Living Together | Fragment No. 2 claimed | 112185419 | [View transaction](https://monadvision.com/tx/0xd9cc03895bfe0bb8a12190acc32fbe4fdc58acac7ae1327a82a2a9384340a4f3) |
+
+**Latest checked state, October 10, 2026:** two F1 NFTs, two shared-art fragments, and one active MON vault. Vault No. 1 still holds **0.01 MON**; No. 2 completed its lifecycle and is burned. The vault contract's **0.01 MON** balance covers its **0.01 MON** remaining principal. These are dated observations, not fixed future balances.
+
+The No. 2 top-up produced different original renderer outputs for its confirmed before/after states. Redemption emitted the matching **0.02 MON** payout event; its ownership and metadata are no longer available after burn. Gas is separate from principal. Some art actions were submitted through a wallet router: event owners and the outer transaction sender are recorded separately rather than assumed identical.
+
+[All decoded mainnet receipts](docs/mainnet-transactions.json) · [Native lifecycle proof](docs/native-mainnet-lifecycle.json) · [Current custody state](docs/native-mainnet-evidence.json) · [Current art state](docs/mainnet-evidence.json)
+
+**Still not claimed:** a post-deployment F1 oracle update, a mainnet community vote/chapter activation, an independent audit, or a transaction performed during the judged presentation. Historical receipts demonstrate actual usage, not those separate milestones.
+
+<details>
+<summary>Earlier mainnet mint checkpoint, retained for completeness</summary>
+
 **Live mainnet transaction:** [`0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63`](https://monadvision.com/tx/0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63) successfully deposited **0.01 MON** and minted **MON Vault No. 1**, block **112180639**. [View the vault](https://livingvault.pics/mainnet/vault/1). Receipt and Minted/Transfer events were checked directly against mainnet; gas is separate from principal. Mainnet top-up and redemption are not yet recorded.
+
+The final sentence describes the earlier checkpoint only. The newer verified activity above confirms No. 2's top-up and redemption.
+</details>
 
 ### Monad Testnet (10143)
 
@@ -100,6 +142,8 @@ These are recorded checkpoints, not promises about future live state. A post-dep
 
 Use a wallet-enabled browser with **test MON** for gas.
 
+**Prefer mainnet?** Open the [Mainnet Home](https://livingvault.pics/mainnet), connect on chain **143**, then use the [MON vault](https://livingvault.pics/mainnet/vault). Deposit at least **0.01 MON** plus separate gas, top up to evolve, and redeem only when ready to burn the NFT. This uses real funds and an experimental, unaudited contract. [Mainnet F1](https://livingvault.pics/mainnet/f1) and [Living Together](https://livingvault.pics/mainnet/together) charge gas, not a purchase price. The original Testnet walkthrough remains below.
+
 1. Open [Create](https://livingvault.pics/create), connect on chain **10143**, and claim test mUSDC.
 2. Deposit at least **1 mUSDC** to mint a vault, confirming approval and mint.
 3. Open your vault, select **Add to vault → Deposit & evolve**, and confirm approval and deposit as required.
@@ -120,6 +164,12 @@ flowchart LR
     Reporter --> F1[F1LivingArt oracle + NFT]
     Vault --> SVG[On-chain JSON and SVG]
     F1 --> SVG
+    MainnetWallet[Wallet signs on Monad Mainnet] --> MON[NativeLivingVault: MON principal]
+    MON --> SVG
+    Artist[Artist proposes chapters] --> Shared[SharedLivingArt: 36 fragments]
+    Holders[Fragment holders vote and express] --> Shared
+    F1 --> Shared
+    Shared --> SVG
     SVG --> UI
 ```
 
@@ -152,6 +202,18 @@ npm run typecheck
 npm run f1:check
 ```
 
+For read-only mainnet evidence, also run:
+
+```sh
+npm run native:compile
+npm run mainnet:check
+npm run native:check
+npm run mainnet:activity
+node scripts/check-native-lifecycle.mjs
+```
+
+These commands read public RPC data without a private key or wallet signatures. Activity scanning uses the public RPC's 100-block request limit; its JSON includes the exact covered block range. The lifecycle check verifies the recorded No. 2 sequence, not an invented fresh transaction. To check the hosted app, install Chromium as below and run `npm run test:public`; this covers 11 public routes, desktop/mobile layouts, loaded images, network-home navigation and explorer links.
+
 Fresh-clone setup, 19 contract checks, build and typecheck passed. Recorded browser checks cover the vault lifecycle; 14 F1 checks cover real-report evolution locally. Public evidence confirms vault deposits and the F1 deployment/mint. No public post-deployment F1 update or security audit is claimed.
 
 For the wallet browser suite, run `npx playwright install chromium`, then `npm run test:e2e`. For the F1 suite, keep the development server running and run `npm run f1:test`. Both use isolated local chains, not public signing keys. GitHub Actions is configured for clean installation, contract tests, build and typecheck.
@@ -172,6 +234,8 @@ Next validation steps are community interviews, artist-led pilots, and measuring
 
 ### Native MON Vault
 
+**Status update:** the verified No. 2 mint, top-up and redemption above supersede the original "unrecorded" checkpoint below. Its 0.02 MON principal was returned; No. 1 remains active with 0.01 MON. The earlier deposit information is retained in full.
+
 **[MON vault](https://livingvault.pics/mainnet/vault)** is deployed separately from existing testnet NFTs at [`0x9a6003f651a04baef93fffc9e853b1fa2cb48d20`](https://monadvision.com/address/0x9a6003f651a04baef93fffc9e853b1fa2cb48d20), source-verified on MonadVision and Monadscan. Exact creation/runtime bytecode and backed principal accounting pass the read-only mainnet check. A real 0.01 MON deposit and NFT mint are confirmed in the receipt above; mainnet top-up and redemption remain unrecorded.
 
 - Deposit at least **0.01 MON** to mint, then top up to evolve. No token approval or wrapping is needed.
@@ -183,6 +247,8 @@ Next validation steps are community interviews, artist-led pilots, and measuring
 Run `npm run native:compile` and `npm run native:test` to reproduce 20 native custody checks. `npm run native:test-ui` passes 11 wallet checks, including delegated-account reserve rejection, against an isolated local EVM, never public funds. `npm run native:check` reads the actual mainnet deployment and accounting; `npm run native:verify` submits its exact source. [Mainnet custody evidence](docs/native-mainnet-evidence.json) · [MON vault guide](https://livingvault.pics/docs#native-mon).
 
 ### Mainnet Status
+
+**Status update:** two F1 NFTs and two shared fragments are now confirmed, including a Flow expression change. The earlier claim-pending status below is historical. Public chapter activation and an independent audit remain unconfirmed.
 
 **[Mainnet F1 collection](https://livingvault.pics/mainnet/f1) · [Mainnet shared composition](https://livingvault.pics/mainnet/together)**
 

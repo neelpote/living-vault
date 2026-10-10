@@ -1,0 +1,17 @@
+{
+  "chainId": 143,
+  "checkedAt": "2026-10-10T12:50:37.879Z",
+  "tokenId": "2",
+  "mintTransaction": "0xd9cad2f51f58af1914cdb6f87b0d8383ec67f81d5c072fa417e14d5a7c6b4563",
+  "topUpTransaction": "0x9c8fc7f98b96c7eaeec52598d794cfd971fd000beac0771a479323c187c0e69d",
+  "redemptionTransaction": "0x8441c1f179920cd7257df393130649c10842b42d9d42fa5fccb61bd76b75a613",
+  "mintedMON": "0.01",
+  "addedMON": "0.01",
+  "redeemedMON": "0.02",
+  "recipient": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+  "originalRendererBefore": "0xdba3ed51aa2ecae9335ea4df6b79f40b5864cd0bb945a1fd7ccf38edf4be6e78",
+  "originalRendererAfter": "0x379c02e9024c6657607034a705b8234dbfbba0856f1672d6ca2815c28c985341",
+  "artworkChanged": true,
+  "nftBurned": true,
+  "scope": "Read-only successful public receipts and decoded events, principal conservation, distinct original renderer outputs for confirmed states, burned NFT ownership/metadata unavailable. Gas is separate from returned principal. No agent signing."
+}

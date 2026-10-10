@@ -18,6 +18,7 @@
     "shared:verify": "node scripts/verify-shared.mjs",
     "mainnet:test": "node scripts/test-mainnet-ui.mjs",
     "mainnet:check": "node scripts/check-mainnet.mjs",
+    "mainnet:activity": "node scripts/check-mainnet-activity.mjs",
     "native:compile": "node scripts/compile-native.mjs",
     "native:test": "node scripts/compile-native.mjs --tests && node scripts/test-native.mjs && node scripts/compile-native.mjs",
     "native:verify": "node scripts/verify-native.mjs",
