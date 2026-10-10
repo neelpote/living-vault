@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-10T07:35:13.920Z",
+  "chainId": 10143,
+  "tokenId": "1",
+  "owner": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+  "principal": "21000000",
+  "topUpCount": 2,
+  "level": "2",
+  "mintedAt": "1791616988",
+  "metadataName": "Living Vault No. 1",
+  "svgBytes": 2683,
+  "svgMatchesCurrentPreview": true,
+  "changedFromMint": true,
+  "vaultTokenBalance": "21000000",
+  "currentDigest": "0x1a53babe60fd31f95aeeff5d4501239b43511950a5829c887966c0d6e381b2f1",
+  "mintDigest": "0x65ca36454b991a1c4b9c95ec76fe12a897726fa4a0e41695c12d84957bc9bb9e",
+  "minted": [
+    {
+      "transactionHash": "0x743c3291242b2fa31c18037b770268bab8e02eedf222e0a440b2af9f692b26a2",
+      "blockNumber": "69764610",
+      "amount": "1000000"
+    }
+  ],
+  "topUps": [
+    {
+      "transactionHash": "0x847433ee321458f270d8c90988ca2598681220adb20649d137b93120b0e0f161",
+      "blockNumber": "69765774",
+      "amount": "10000000",
+      "newPrincipal": "11000000",
+      "newTopUpCount": 1
+    },
+    {
+      "transactionHash": "0x4b0aa0f91fe89e8bad4f9e00300c15f332013ded42e455f7910df96ded5399af",
+      "blockNumber": "69765905",
+      "amount": "10000000",
+      "newPrincipal": "21000000",
+      "newTopUpCount": 2
+    }
+  ]
+}

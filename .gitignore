@@ -1,0 +1,13 @@
+node_modules/
+.next/
+artifacts/
+cache/
+.env*
+!.env.example
+.deployment-wallet.json
+test-results/
+playwright-report/
+*.tsbuildinfo
+.vercel/
+.vercel
+.DS_Store

@@ -1,0 +1,68 @@
+{
+  "origin": "Compiled Solidity previewSVG on local EVM, not minted testnet NFTs",
+  "previews": [
+    {
+      "level": 0,
+      "tokenId": "1",
+      "principal": "10000000",
+      "topUps": 0,
+      "digest": "0x6cc2a4702e32b0a6fefd0081f1ec41a0427bbcc4bd3812651452a6921f5b44a0"
+    },
+    {
+      "level": 1,
+      "tokenId": "1",
+      "principal": "11000000",
+      "topUps": 1,
+      "digest": "0x5ef683dcf715de4d3b66a239a3cfac9b648ca81b2e95ffdab8c46c316591199c"
+    },
+    {
+      "level": 2,
+      "tokenId": "1",
+      "principal": "12000000",
+      "topUps": 2,
+      "digest": "0x1a53babe60fd31f95aeeff5d4501239b43511950a5829c887966c0d6e381b2f1"
+    },
+    {
+      "level": 3,
+      "tokenId": "1",
+      "principal": "13000000",
+      "topUps": 3,
+      "digest": "0x9875f4d23fe1db1d9ad487812fb08eb668f5a3992bda40e1b9c154ecdf6f6b22"
+    },
+    {
+      "level": 4,
+      "tokenId": "1",
+      "principal": "14000000",
+      "topUps": 4,
+      "digest": "0xba3cbd481f940a19a56bd161e9c026675b829d9cddcfbedf623a7de6200fb72d"
+    },
+    {
+      "level": 5,
+      "tokenId": "1",
+      "principal": "15000000",
+      "topUps": 5,
+      "digest": "0x1e156ec21fc634afdc2eb28633ec8c37d15c19d9c9a675ef49ced5079d5e0058"
+    },
+    {
+      "level": 6,
+      "tokenId": "1",
+      "principal": "16000000",
+      "topUps": 6,
+      "digest": "0x5945b5f51bb05a2f9a42b53dac7efd5bda37e486e5ebce8eec4d96ce538e5029"
+    },
+    {
+      "level": 7,
+      "tokenId": "1",
+      "principal": "17000000",
+      "topUps": 7,
+      "digest": "0x4f42fe172170824295cc972d0da468d4bfb35fc5f0642ad26751a673c849cd60"
+    },
+    {
+      "level": 8,
+      "tokenId": "1",
+      "principal": "18000000",
+      "topUps": 8,
+      "digest": "0x06c68c6390204926c65fef2dda38fe8f83c1dff66437350167f5da1dc0a8a516"
+    }
+  ]
+}

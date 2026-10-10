@@ -1,0 +1,19 @@
+{
+  "chainId": 10143,
+  "mockUSDC": "0x2937e4a29f6a60ee56375f7b3fd9b71542ec6afb",
+  "livingVault": "0x760600d4fdd56b49941fa91b096666d56c08ec5f",
+  "blockNumber": "69764353",
+  "deployedAt": "2026-10-10T07:21:57.930Z",
+  "verification": {
+    "mockUSDC": {
+      "httpStatus": 200,
+      "response": "{\"success\":true,\"verified\":2,\"total\":2,\"results\":{\"monadvision\":{\"status\":\"success\",\"message\":\"Verified with perfect match\",\"url\":\"https://testnet.monadvision.com/address/0x2937e4a29f6a60ee56375f7b3fd9b71542ec6afb\"},\"monadscan\":{\"status\":\"success\",\"message\":\"Pass - Verified\",\"guid\":\"acxyznq8e3xz7rpwyfvu3iaxplt1twabfvntwvsuzfpcpergcy\",\"url\":\"https://testnet.monadscan.com/address/0x2937e4a29f6a60ee56375f7b3fd9b71542ec6afb\"}}}",
+      "submittedAt": "2026-10-10T07:23:44.973Z"
+    },
+    "livingVault": {
+      "httpStatus": 200,
+      "response": "{\"success\":true,\"verified\":2,\"total\":2,\"results\":{\"monadvision\":{\"status\":\"success\",\"message\":\"Verified with perfect match\",\"url\":\"https://testnet.monadvision.com/address/0x760600d4fdd56b49941fa91b096666d56c08ec5f\"},\"monadscan\":{\"status\":\"success\",\"message\":\"Pass - Verified\",\"guid\":\"gzdtys3simwpe9smjbcwz2p1mnux8bmdqmeaynpwq3merarfk3\",\"url\":\"https://testnet.monadscan.com/address/0x760600d4fdd56b49941fa91b096666d56c08ec5f\"}}}",
+      "submittedAt": "2026-10-10T07:23:51.638Z"
+    }
+  }
+}

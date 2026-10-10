@@ -1,0 +1,11 @@
+.agents
+artifacts
+cache
+contracts
+scripts
+/docs
+test-results
+AGENT_HANDOFF.md
+skills-lock.json
+*.tsbuildinfo
+.env*

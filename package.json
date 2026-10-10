@@ -1,0 +1,27 @@
+{
+  "name": "living-vault", "version": "1.0.0", "private": true, "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "contracts:compile": "node scripts/compile.mjs",
+    "contracts:test": "node scripts/test-contracts.mjs",
+    "contracts:deploy": "node --env-file-if-exists=.env.local scripts/deploy.mjs",
+    "contracts:verify": "node scripts/verify.mjs",
+    "test:testnet": "node scripts/check-testnet.mjs",
+    "test:e2e": "node scripts/test-browser.mjs",
+    "chain:local": "hardhat node"
+  },
+  "dependencies": {
+    "next": "16.4.0", "react": "19.2.4", "react-dom": "19.2.4",
+    "wagmi": "3.7.7", "viem": "^2.38.0", "@tanstack/react-query": "^5.90.0",
+    "lucide-react": "^0.468.0"
+  },
+  "overrides": { "tmp": "^0.2.6" },
+  "devDependencies": {
+    "@openzeppelin/contracts": "5.6.1", "solc": "0.8.31", "hardhat": "3.19.0",
+    "typescript": "^5.9.0", "@types/node": "^22.0.0", "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0", "@playwright/test": "^1.56.0"
+  }
+}
