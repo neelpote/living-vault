@@ -2,6 +2,15 @@
 
 Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted. Actual user-wallet mint and top-up confirmed on Monad Testnet. Read this before modifying the project.
 
+## Judging Readiness Update
+
+- Owner supplied prize rubric and a 5:45 PM IST October 10 cutoff. `docs/SUBMISSION.md` maps every criterion to evidence or a clearly outstanding owner action; includes a 90-second pitch mentioning all four eligibility items, live transaction runbook, social draft and demo/ad scripts. No award, social-view count, revenue, customer traction, mainnet or custom-domain claim is made.
+- README now prioritizes the public repo/live site/verified F1 contract, links the submission kit, and distinguishes proposed audience/revenue/validation from measured traction. Default public evidence instructions use the active F1 collection, not burned deposit vault No. 1.
+- Fresh public clone of commit `1a0c961bc0ef96082584b409e89a9e66e7c4311d` in an isolated temp directory: `npm ci` PASS (0 reported vulnerabilities), compilation PASS, 19 contract checks PASS, renderer checks PASS, build PASS, sequential typecheck PASS. Started `npm run dev -- --port 3004`; read-only browser verified homepage and configured F1 gallery with exact source digest match, no environment file/private key. Temporary server stopped; original shared server left running.
+- `.github/workflows/verify.yml` adds Node 22 clean-install/compile/contract/renderer/build/typecheck checks. No live-data/API-dependent F1 tests or wallet signing in CI. Workflow execution and branch-protection enforcement must not be assumed from the file alone.
+- No new on-chain writes, mainnet deployment, domain purchase, or social posting occurred for this readiness update. Historic transactions do not fulfill a live judged transaction; presenter must perform it during the demo.
+- `docs/videos/living-vault-product-demo.mp4`: actual public-site read-only Playwright capture, converted to H.264/yuv420p MP4 with fast-start, 1280x720, 61.36 seconds, 947526 bytes, silent. Sample frames visually reviewed (homepage, actual Ferrari original SVG, report provenance). No fabricated data/wallet transaction. This is a ready-to-upload product walkthrough, not a posted social video or finished creative ad. WebM intermediate removed; ad script remains in submission kit.
+
 ## User request and scope
 
 Build the complete Living Vault project from the supplied PRD, working on Monad Testnet. Include mint, test-token faucet, top-up evolution, transfer, redemption, gallery, public detail, hypothetical previews, event-derived history, exact SVG download, sharing, and transaction lifecycle. Maintain this handoff so another agent can distinguish verified facts from assumptions.

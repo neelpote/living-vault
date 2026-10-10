@@ -12,6 +12,12 @@ Built and deployed on **Monad Testnet, chain 10143**. This edition uses **mUSDC,
 
 ## For Judges: Start Here
 
+**Public repository:** [github.com/neelpote/living-vault](https://github.com/neelpote/living-vault). **Live product:** [living-vault-three.vercel.app](https://living-vault-three.vercel.app). **Verified sports oracle/NFT:** [`0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451`](https://testnet.monadvision.com/address/0x1ba990f986e74295b1a4f65c5d654ebaa6ee4451), Monad Testnet **10143**. The two deposit-vault contract addresses are listed below.
+
+For the judging rubric, pitch, timed live transaction, social/video scripts, and remaining evidence, use the [Submission Kit](docs/SUBMISSION.md). No social views, revenue, mainnet deployment, or unobserved oracle updates are claimed.
+
+[Watch the 61-second running-product recording](docs/videos/living-vault-product-demo.mp4). Real public-site capture; no staged wallet transaction. Social upload is still required.
+
 Living Vault turns an evolving collectible into a working ownership loop: **deposit → mint → evolve → transfer → redeem**. The visual change follows a confirmed contract transaction, so the demo shows both an artistic result and an independently verifiable state change.
 
 | Explore | Link | What to look for |
@@ -215,8 +221,12 @@ npm run typecheck
 npx playwright install chromium
 npm run test:e2e
 
-# Read-only public-chain check; refreshes the evidence file.
-npm run test:testnet
+# Read-only public-chain check for the deployed F1 collection.
+npm run f1:check
+
+# Optional deposit-vault evidence: replace 2 with your active, evolved token ID.
+# Previously minted vault No. 1 has been redeemed; do not use it here.
+npm run test:testnet -- 2
 ```
 
 | Check | Recorded result |
@@ -227,8 +237,21 @@ npm run test:testnet
 | Latest frontend | Production build and typecheck passed |
 | Latest landing layout | 1440, 1024, 768, 390 and 320px: images loaded, FAQ works, no overflow or page errors |
 | Public testnet | Actual user-wallet mint and two top-ups; receipts, accounting, mutation and renderer equality verified |
+| F1 collection | 14 local checks with real reports; public 11-team values and minted Ferrari NFT verified; production desktop/mobile checks passed |
 
 The browser suite uses local EVM port **18546** and a temporary app on **3001**. Contract tests use **18545**. Tests preserve shared testnet configuration and never sign public-chain transactions. Reports/screenshots go into ignored `test-results/`.
+
+GitHub Actions runs clean installation, contract compilation, contract tests, renderer tests, production build and typecheck on pushes and pull requests. It does not sign wallet transactions, depend on live F1 results, or imply a security audit. Branch-protection enforcement is not configured or claimed.
+
+## Audience and Business Direction
+
+**Initial audience:** sports communities, fan clubs, and artists who want collectible identity to follow participation or real results rather than a static JPEG. The current F1 collection demonstrates the sports-data path; the deposit collection demonstrates holder-driven evolution and portable redemption rights.
+
+**Proposed model, not current revenue:** offer commissioned living collections and hosted publishing tools to independent communities; charge for setup and optional ongoing service. Keep the oracle's authority, data licensing, and refresh policy explicit. A future paid mint could support artists, but the current F1 mint is free and royalties are not guaranteed or implemented. Test mUSDC is not revenue.
+
+**Validation plan, not claimed traction:** interview five community operators, ask two artists to create a pilot collection, measure independent wallet mints and repeat visits after real result publications, then test willingness to pay for a hosted pilot. There are no verified paying customers or product-market-fit claims yet. Commercial F1 branding/data use would require separate rights review; this prototype is not affiliated with Formula 1 or its teams.
+
+**What is distinctive:** one platform demonstrates two verifiable evolution triggers: holder-funded state changes and real sports reports. F1 artwork is the original on-chain SVG, with downloadable source reports, explicit reporter trust, and source/published comparisons rather than opaque off-chain image replacement. This is a differentiator, not a claim to be the first dynamic NFT.
 
 **Validation limits:** public-chain transfer and redemption have not been exercised through the user's wallet; they are tested locally. A hosted wallet-signing walkthrough, timed judge demo and independent audit are not claimed. Testnet resets and RPC outages can affect availability. The public evidence script scans history in small ranges and may take longer as the chain advances.
 
