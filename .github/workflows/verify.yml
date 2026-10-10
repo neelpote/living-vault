@@ -15,6 +15,7 @@ jobs:
       - run: npm ci
       - run: npm run contracts:compile
       - run: npm run contracts:test
+      - run: npm run native:test
       - run: node scripts/test-demo-art.mjs
       - run: npm run build
       - run: npm run typecheck

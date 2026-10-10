@@ -4,6 +4,14 @@ Updated: 2026-10-10. Implemented, deployed, source-verified and publicly hosted.
 
 ## Mainnet Deployment (Confirmed)
 
+### Final Website Checks (2026-10-10)
+
+- Resumed final polish after README/mainnet proof commit `2aab4ac` was pushed to `neelpote/living-vault`. Corrected mainnet navigation's Your collection link to `/mainnet/vault#collection`; it no longer sends users to Testnet. Native owned collection exposes that anchor. Added a keyboard-only Skip to content link and focusable main landmark without changing exhibition design.
+- Expanded `npm run test:public` to ten routes: homepage, create, F1, shared, mainnet F1, native mint page, actual native NFT1, actual F1 NFT1, mainnet shared and docs. PASS against production at1440/390/320: no horizontal overflow, image decoding failures, missing image descriptions, page errors or hydration errors. Checks confirm correct mainnet collection navigation, local fonts and native NFT1's actual0.01MON principal. The NFT1 assertion is a current-state smoke check: update it if the owner evolves or redeems that NFT, rather than displaying substitute data.
+- Added the20 local native custody checks to GitHub Actions; local run PASS. Workflow execution on GitHub must be checked separately. Final production build and typecheck PASS. No Solidity or public chain state changed during polish.
+- Published `dpl_5zMq7BGogSLRtqnsiKJHNZKaoKnK`, READY, aliased to https://livingvault.pics. Deployment URL https://living-vault-d3sv7cbgb-neelpote44-7832s-projects.vercel.app. Mainnet top-up and redemption still not observed. Asked owner whether to preserve NFT1 for demo or perform custody smoke; no agent signing or fund movement.
+- Restarted only our stale development server after Shell edits; clean ten-route local reload checks PASS with no hydration errors. Current intentional development server session87985 on localhost3000 supersedes older session references below.
+
 ### Native MON Vault (Deployed and Source-Verified)
 
 - Latest human supplied `0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63` and requested EVERY mainnet address plus deployment/example transaction links in README. Actual receipt SUCCESS chain143/block112180639: `mint(address)` to native vault, exact0.01MON value, sender/recipient `0x3ae38edd6edfd90180ec897cbf0c5ba527459c83`, Transfer from0x0 forNFT1 and exact Minted event. This is a DIFFERENT account from the delegated deployer. Stored verified historical receipt facts in `docs/native-mainnet-mint.json`. Do not claim undelegation of original wallet. Fresh native evidence supply1/totalPrincipal0.01MON/contractbalance0.01MON/topups0/level0. Mainnet top-up and redemption still pending, no public transaction sent by agent.
