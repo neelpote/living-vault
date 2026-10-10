@@ -4,11 +4,11 @@ import { WagmiProvider, createConfig, http } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import saved from '@/config/deployment.json';
-import { monadTestnet, type Deployment } from '@/lib/chain';
+import { monad, monadTestnet, type Deployment } from '@/lib/chain';
 
 // Direct account requests avoid an extra wallet_requestPermissions prompt on connection.
-const config = createConfig({ chains: [monadTestnet], connectors: [injected({ target: 'metaMask', shimDisconnect: false }), injected({ shimDisconnect: false })], multiInjectedProviderDiscovery: true,
-  transports: { [monadTestnet.id]: http('https://testnet-rpc.monad.xyz') }, ssr: true });
+const config = createConfig({ chains: [monadTestnet, monad], connectors: [injected({ target: 'metaMask', shimDisconnect: false }), injected({ shimDisconnect: false })], multiInjectedProviderDiscovery: true,
+  transports: { [monadTestnet.id]: http('https://testnet-rpc.monad.xyz'), [monad.id]: http('https://rpc.monad.xyz') }, ssr: true });
 const DeploymentContext = createContext<{ deployment: Deployment; save: (d: Deployment) => void }>({ deployment: saved as Deployment, save: () => {} });
 export const useDeployment = () => useContext(DeploymentContext);
 export function Providers({ children }: { children: ReactNode }) {

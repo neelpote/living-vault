@@ -1,6 +1,8 @@
 import { createPublicClient, fallback, http, formatUnits, type Address } from 'viem';
-import { monadTestnet } from 'viem/chains';
-export { monadTestnet };
+import { monad, monadTestnet } from 'viem/chains';
+export { monad, monadTestnet };
+export const mainnetClient = createPublicClient({chain: monad, transport: http('https://rpc.monad.xyz', {timeout: 12_000, retryCount: 2}), pollingInterval: 3000});
+export const mainnetExplorer = 'https://monadvision.com';
 export const explorer = 'https://testnet.monadvision.com';
 export const publicClient = createPublicClient({ chain: monadTestnet,
   transport: fallback([http('https://testnet-rpc.monad.xyz', { timeout: 12_000, retryCount: 2 }), http('https://rpc-testnet.monadinfra.com', { timeout: 12_000 })]),

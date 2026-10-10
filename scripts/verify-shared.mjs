@@ -1,8 +1,11 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {encodeAbiParameters} from 'viem';
 import solc from 'solc';
-const d=JSON.parse(readFileSync('config/shared-deployment.json'));
-if(d.chainId!==10143||!d.address)throw Error('No confirmed shared Testnet deployment.');
+const mainnet=process.argv.includes('--mainnet');
+const chainId=mainnet?143:10143;
+const file=mainnet?'config/shared-mainnet.json':'config/shared-deployment.json';
+const d=JSON.parse(readFileSync(file));
+if(d.chainId!==chainId||!d.address)throw Error('No confirmed shared deployment on the requested network.');
 const artifact=JSON.parse(readFileSync('artifacts/SharedLivingArt.json'));
 const full=JSON.parse(readFileSync('artifacts/standard-input.json'));
 // Import-callback parsing allocated AST IDs before dependencies. Preserve that
@@ -28,6 +31,6 @@ if(compiled.errors?.some(e=>e.severity==='error'))throw Error('Verification inpu
 const result=compiled.contracts['contracts/SharedLivingArt.sol'].SharedLivingArt;
 const stripMetadata=bytes=>bytes.slice(0,-(parseInt(bytes.slice(-4),16)+2)*2);
 if(stripMetadata(result.evm.bytecode.object)!==stripMetadata(artifact.bytecode.slice(2))||stripMetadata(result.evm.deployedBytecode.object)!==stripMetadata(artifact.deployedBytecode.slice(2)))throw Error('Executable bytecode mismatch; refusing submission');
-const payload={chainId:10143,contractAddress:d.address,contractName:'contracts/SharedLivingArt.sol:SharedLivingArt',compilerVersion:'v'+artifact.compilerVersion.split('.Emscripten')[0],standardJsonInput:verificationInput,foundryMetadata:JSON.parse(result.metadata),constructorArgs:encodeAbiParameters(artifact.abi.find(a=>a.type==='constructor').inputs,[d.oracle]).slice(2)};
+const payload={chainId,contractAddress:d.address,contractName:'contracts/SharedLivingArt.sol:SharedLivingArt',compilerVersion:'v'+artifact.compilerVersion.split('.Emscripten')[0],standardJsonInput:verificationInput,foundryMetadata:JSON.parse(result.metadata),constructorArgs:encodeAbiParameters(artifact.abi.find(a=>a.type==='constructor').inputs,[d.oracle]).slice(2)};
 const response=await fetch('https://agents.devnads.com/v1/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(60000)});const body=await response.text();
-console.log(`HTTP ${response.status}: ${body}`);d.verification={httpStatus:response.status,response:body,submittedAt:new Date().toISOString(),method:'AST-order-preserving import path aliases; executable bytes locally matched; metadata path hashes differ'};writeFileSync('config/shared-deployment.json',JSON.stringify(d,null,2)+'\n');if(!response.ok||!JSON.parse(body).success)process.exitCode=1;
+console.log(`HTTP ${response.status}: ${body}`);d.verification={httpStatus:response.status,response:body,submittedAt:new Date().toISOString(),method:'AST-order-preserving import path aliases; executable bytes locally matched; metadata path hashes differ'};writeFileSync(file,JSON.stringify(d,null,2)+'\n');if(!response.ok||!JSON.parse(body).success)process.exitCode=1;

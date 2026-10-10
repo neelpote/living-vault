@@ -1,0 +1,65 @@
+{
+  "chainId": 143,
+  "checkedAt": "2026-10-10T12:06:17.645Z",
+  "f1": {
+    "address": "0x80c1ec7f551198586c301fa4bdcdcb51505c06f3",
+    "reporter": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+    "sourceHash": "0xcf41ee292ce6a1e7b1a2fb921f9b08222840a759d7971d9fcd28fe30a1424b55",
+    "supply": "1",
+    "teams": [
+      {
+        "constructorId": "alpine",
+        "titles": 0
+      },
+      {
+        "constructorId": "aston_martin",
+        "titles": 0
+      },
+      {
+        "constructorId": "audi",
+        "titles": 0
+      },
+      {
+        "constructorId": "cadillac",
+        "titles": 0
+      },
+      {
+        "constructorId": "ferrari",
+        "titles": 16
+      },
+      {
+        "constructorId": "haas",
+        "titles": 0
+      },
+      {
+        "constructorId": "mclaren",
+        "titles": 10
+      },
+      {
+        "constructorId": "mercedes",
+        "titles": 8
+      },
+      {
+        "constructorId": "rb",
+        "titles": 0
+      },
+      {
+        "constructorId": "red_bull",
+        "titles": 6
+      },
+      {
+        "constructorId": "williams",
+        "titles": 9
+      }
+    ]
+  },
+  "shared": {
+    "address": "0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e",
+    "oracle": "0x80C1EC7F551198586C301fA4bdcDCb51505C06f3",
+    "artist": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+    "supply": "0",
+    "compositionRevision": "1",
+    "proposalCount": "0"
+  },
+  "scope": "Read-only public Monad mainnet identity, exact constructor calldata, report values and original SVG checks. No transaction submitted by this check."
+}

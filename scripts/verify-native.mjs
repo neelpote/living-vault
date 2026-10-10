@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createPublicClient,http} from 'viem';
+import {monad} from 'viem/chains';
+const file='config/native-mainnet.json';
+const deployment=JSON.parse(readFileSync(file));
+if(deployment.chainId!==143||!deployment.address)throw Error('No confirmed MON vault deployment.');
+const artifact=JSON.parse(readFileSync('artifacts/NativeLivingVault.json'));
+const input=JSON.parse(readFileSync('artifacts/native-standard-input.json'));
+const client=createPublicClient({chain:monad,transport:http('https://rpc.monad.xyz')});
+if(await client.getChainId()!==143||(await client.getCode({address:deployment.address}))?.toLowerCase()!==artifact.deployedBytecode.toLowerCase())throw Error('Wrong network or runtime bytecode mismatch.');
+const response=await fetch('https://agents.devnads.com/v1/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chainId:143,contractAddress:deployment.address,contractName:'contracts/NativeLivingVault.sol:NativeLivingVault',compilerVersion:'v'+artifact.compilerVersion.split('.Emscripten')[0],standardJsonInput:input,foundryMetadata:artifact.metadata,constructorArgs:''}),signal:AbortSignal.timeout(60000)});
+const body=await response.text();console.log(`HTTP ${response.status}: ${body}`);
+deployment.verification={httpStatus:response.status,response:body,submittedAt:new Date().toISOString()};writeFileSync(file,JSON.stringify(deployment,null,2)+'\n');
+if(!response.ok||!JSON.parse(body).success)process.exitCode=1;

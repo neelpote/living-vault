@@ -2,6 +2,16 @@
 
 Checkpoint: 2026-10-10. Values below were observed, not inferred from frontend previews.
 
+## Actual Mainnet Art Deployment
+
+User-wallet deployments on chain143: F1LivingArt `0x80c1ec7f551198586c301fa4bdcdcb51505c06f3`, transaction `0xc4f096f01779ede507e13e893d04fde5020a94115a4f25565de8347d9eb33b2f`; SharedLivingArt `0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e`, transaction `0x0a52e10d10be6ba410f67b8156b63b2658acadf46908d8a8f3577a96770c6a14`. Both use the same deploying user as immutable reporter/artist; shared links to the new mainnet oracle, never the Testnet address.
+
+`npm run mainnet:check` PASS: exact receipt/constructor calldata, network, runtime presence, immutable identities, canonical report digest and all11 published real team values, original on-chain SVG. [Public evidence](mainnet-evidence.json) initially records zero minted NFTs/fragments/proposals; do not claim public chapter activation or mainnet mint from local tests. Actual deployment network fees total0.936525852MON, using gas limits and receipt gas prices. No deposit balance or native-value transfer in these art contracts.
+
+F1 source verified on [MonadVision](https://monadvision.com/address/0x80c1ec7f551198586c301fa4bdcdcb51505c06f3) (perfect match) and Monadscan. Shared source verified on [Monadscan](https://monadscan.com/address/0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e); MonadVision failed and is not claimed. Responses retained in the separate mainnet config files. Source verification is not an independent security audit. Deposit custody remains Testnet only.
+
+Mainnet wallet/browser tests use an isolated local EVM, not real funds. Navbar tests cover wallet-chain and collection-route switching, rejection preserving the current edition, and no transaction on a network switch. Header geometry checks at1440/1024/768/390/320 show no brand/control overlap or overflow. Dev output was isolated into `.next-dev`; repeated mainnet/testnet reloads after a production build show no hydration errors.
+
 ## Shared Composition and Voting
 
 `npm run shared:test`: 21 checks passed on isolated local EVM18548 with two genuine Jolpica round15/16 reports. Covers 36-piece bounds, holder expression, artist-only bounded proposals, eligibility snapshot, duplicate votes after transfer, deadline/finalization, zero turnout, deterministic tie, newer-report activation, original metadata and ERC-4906. Browser wallet exercised deployment, claim, edit, propose, vote, finalize and apply; exact fragment pixels matched their full composition crop. Screenshots at1440/768/390/320 show loaded art, no overflow/page errors. Local application3005 and chain shut down; public config preserved. Build/typecheck passed.
@@ -90,3 +100,8 @@ All11 team identities, championship counts/last title, current points/wins/posit
 A read-only public RPC check during GitHub preparation returned `totalSupply() = 0`, `nextTokenId() = 2`, and a reverted `ownerOf(1)`. The hosted detail page reports vault No. 1 redeemed. The mint/two-top-up evidence above remains a historical checkpoint; no active NFT is claimed at this later check. A redemption transaction hash and payout receipt were not independently inspected. Create and evolve a fresh token for a live demo; pass its ID to `npm run test:testnet -- <token-id>` when refreshing evidence. Do not overwrite historical evidence with inferred values.
 
 Live transfer/redeem are covered locally, but not yet observed through the user's public-chain wallet. No independent security audit or timed judge walkthrough is claimed. Testnet resets can invalidate recorded deployments.
+## Native MON Mainnet Vault
+
+Contract: `0x9a6003f651a04baef93fffc9e853b1fa2cb48d20`, chain143. Deployment transaction `0x79357b581b8eb3556df8aab9c791e86a623f05fd2c615e4917f29c1a53b89012`, block112177778. MonadVision perfect match and Monadscan Pass-Verified; exact source response saved in `config/native-mainnet.json`.
+
+`npm run native:check` validates the actual receipt, zero-value creation, exact creation/runtime code, balance backing, all live principal and original tokenURI artwork; evidence in `docs/native-mainnet-evidence.json`. Initial creator-account deposit was blocked before signing by the delegated-account reserve rule. The user then minted from another account: [actual successful 0.01 MON mint](https://monadvision.com/tx/0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63), block112180639, NFT1. Transfer and Minted events checked; [receipt evidence](native-mainnet-mint.json). Fresh supply1/principal0.01MON/backing0.01MON/topups0. Mainnet top-up/redemption remain unrecorded. Local custody20 and isolated wallet11 checks passed. No independent audit claimed.

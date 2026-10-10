@@ -1,0 +1,16 @@
+{
+  "chainId": 143,
+  "scope": "Confirmed actual mainnet deposit, wallet-signed by the user. No top-up or redemption claimed.",
+  "contract": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+  "transactionHash": "0x315346fb8e6c6452ee901dd72c9b70614c2f015a72b472361e3d128c8ba3af63",
+  "status": "success",
+  "blockNumber": "112180639",
+  "tokenId": "1",
+  "senderAndMintOwner": "0x3ae38edd6edfd90180ec897cbf0c5ba527459c83",
+  "principalWei": "10000000000000000",
+  "principalMON": "0.01",
+  "gasLimit": "255911",
+  "effectiveGasPriceWei": "102000000000",
+  "networkFeeMON": "0.026102922",
+  "verifiedEvents": ["Transfer from zero address to mint owner for token 1", "Minted token 1 with exact 0.01 MON amount"]
+}

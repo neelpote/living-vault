@@ -1,0 +1,12 @@
+{
+  "chainId": 143,
+  "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+  "transactionHash": "0x79357b581b8eb3556df8aab9c791e86a623f05fd2c615e4917f29c1a53b89012",
+  "blockNumber": "112177778",
+  "deployedAt": "2026-10-10T12:05:09.571Z",
+  "verification": {
+    "httpStatus": 200,
+    "response": "{\"success\":true,\"verified\":2,\"total\":2,\"results\":{\"monadvision\":{\"status\":\"success\",\"message\":\"Verified with perfect match\",\"url\":\"https://monadvision.com/address/0x9a6003f651a04baef93fffc9e853b1fa2cb48d20\"},\"monadscan\":{\"status\":\"success\",\"message\":\"Pass - Verified\",\"guid\":\"sqvebxdzmq4ckvh3nyupsslqpcnkre6spvaiivxifjfefpsndr\",\"url\":\"https://monadscan.com/address/0x9a6003f651a04baef93fffc9e853b1fa2cb48d20\"}}}",
+    "submittedAt": "2026-10-10T12:05:40.269Z"
+  }
+}

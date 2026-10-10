@@ -1,0 +1,15 @@
+{
+  "chainId": 143,
+  "address": "0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e",
+  "oracle": "0x80C1EC7F551198586C301fA4bdcDCb51505C06f3",
+  "artist": "0x3eC0325C7656784f1aDB4b19e670AeAf26a2ecC2",
+  "transactionHash": "0x0a52e10d10be6ba410f67b8156b63b2658acadf46908d8a8f3577a96770c6a14",
+  "blockNumber": "112173341",
+  "deployedAt": "2026-10-10T11:42:49.729Z",
+  "verification": {
+    "httpStatus": 200,
+    "response": "{\"success\":true,\"verified\":1,\"total\":2,\"results\":{\"monadvision\":{\"status\":\"failed\",\"message\":\"The recompiled bytecode length doesn't match the onchain bytecode length.\"},\"monadscan\":{\"status\":\"success\",\"message\":\"Pass - Verified\",\"guid\":\"3tknm3x9ysr7fjhbup9qp6fl2xzkp39nj7gtj34i2cjwumryvt\",\"url\":\"https://monadscan.com/address/0x9f97dd0db7b6f073c2874641909a512ffb5f9f4e\"}}}",
+    "submittedAt": "2026-10-10T11:43:58.748Z",
+    "method": "AST-order-preserving import path aliases; executable bytes locally matched; metadata path hashes differ"
+  }
+}

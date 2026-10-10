@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-10T12:20:53.939Z",
+  "scope": "Read-only actual Monad Mainnet. No wallet signing or write.",
+  "chainId": 143,
+  "address": "0x9a6003f651a04baef93fffc9e853b1fa2cb48d20",
+  "transactionHash": "0x79357b581b8eb3556df8aab9c791e86a623f05fd2c615e4917f29c1a53b89012",
+  "deployer": "0x3ec0325c7656784f1adb4b19e670aeaf26a2ecc2",
+  "blockNumber": "112177778",
+  "exactCreationAndRuntimeMatch": true,
+  "gasLimit": "3257086",
+  "deploymentFeeMON": "0.332222772",
+  "totalPrincipalWei": "10000000000000000",
+  "balanceWei": "10000000000000000",
+  "totalSupply": "1",
+  "nextTokenId": "2",
+  "tokens": [
+    {
+      "id": "1",
+      "owner": "0x3ae38EDD6eDfD90180EC897cbF0C5BA527459C83",
+      "principalWei": "10000000000000000",
+      "topUps": 0,
+      "level": "0",
+      "artworkDigest": "0x65ca36454b991a1c4b9c95ec76fe12a897726fa4a0e41695c12d84957bc9bb9e"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 import { useAccount, useWalletClient } from 'wagmi';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
-import { type Abi, type Address, type Hash, formatEther, type TransactionReceipt } from 'viem';
+import { type Abi, type Address, type Hash, formatEther, parseEther, type TransactionReceipt, type PublicClient } from 'viem';
 import { vaultAbi } from '@/lib/generated/LivingVault';
 import { tokenAbi } from '@/lib/generated/MockUSDC';
 import { publicClient, decodeMetadata, type Vault } from '@/lib/chain';
@@ -45,28 +45,38 @@ export function useCollection() {
 }
 export type TxState = { stage: 'idle' | 'estimating' | 'signature' | 'submitted' | 'confirmed' | 'refreshed' | 'failed'; label: string; hash?: Hash; error?: string; cost?: string };
 export function friendlyError(error: unknown) {
-  const e = error as { shortMessage?: string; message?: string };
+  const e = error as { shortMessage?: string; message?: string; details?:string };
   const message = e.shortMessage || e.message || 'The network is busy. Please try again.';
+  if (/reserve balance violation/i.test(`${e.details??''} ${e.message??''}`)) return 'Monad rejected this payment because of its reserve-balance rules. A smart-account wallet must retain 10 MON plus the deposit and network fee. Use a regular account or review your smart-account balance.';
   if (/reject|denied/i.test(message)) return 'You cancelled the request in your wallet.';
   if (/cooldown/i.test(message)) return 'The faucet is cooling down. Try again in 60 seconds.';
   if (/insufficient funds/i.test(message)) return 'Not enough test MON for gas. Visit the MON faucet.';
   return message.slice(0, 300);
 }
-export function useTransaction() {
+export function useTransaction(client: PublicClient = publicClient, expectedChainId = 10143) {
+  const publicClient = client;
   const { address, chainId } = useAccount(); const { data: wallet } = useWalletClient();
   const queryClient = useQueryClient();
   const [tx, setTx] = useState<TxState>({ stage: 'idle', label: '' });
   const confirmedRefresh = useRef<(() => Promise<void>) | null>(null);
   const busy = ['estimating', 'signature', 'submitted', 'confirmed'].includes(tx.stage);
-  async function run(label: string, request: { address: Address; abi: Abi; functionName: string; args?: readonly unknown[] }, refresh?: (receipt: TransactionReceipt) => Promise<void>) {
+  async function run(label: string, request: { address: Address; abi: Abi; functionName: string; args?: readonly unknown[]; value?: bigint }, refresh?: (receipt: TransactionReceipt) => Promise<void>) {
     let receipt: TransactionReceipt | undefined;
     try {
       if (!wallet || !address) throw new Error('Connect a wallet to continue.');
-      if (chainId !== 10143 || await wallet.getChainId() !== 10143 || await publicClient.getChainId() !== 10143) throw new Error('Switch to Monad Testnet before continuing.');
+      if (chainId !== expectedChainId || await wallet.getChainId() !== expectedChainId || await publicClient.getChainId() !== expectedChainId) throw new Error(`Switch to ${expectedChainId === 143 ? 'Monad Mainnet' : 'Monad Testnet'} before continuing.`);
       setTx({ stage: 'estimating', label });
+      let delegated = false;
+      if(expectedChainId===143 && (request.value??0n)>0n){
+        const [code,balance]=await Promise.all([publicClient.getCode({address}),publicClient.getBalance({address})]);
+        delegated=code?.toLowerCase().startsWith('0xef0100')??false;
+        if(delegated && balance < parseEther('10')+request.value!) throw new Error('This wallet is a delegated smart account. Monad requires 10 MON to remain available, plus your deposit and network fee. Use a regular account or fund this account above that amount. No deposit was sent.');
+      }
       const estimate = await publicClient.estimateContractGas({ ...request, account: address });
       const gas = estimate + estimate / 20n;
       const fees = await publicClient.estimateFeesPerGas();
+      if (expectedChainId === 143 && await publicClient.getBalance({address}) < (request.value ?? 0n) + gas * fees.maxFeePerGas) throw new Error(request.value ? 'Not enough MON on Monad Mainnet for the deposit plus maximum network fee.' : 'Not enough MON on Monad Mainnet for the maximum network fee.');
+      if(delegated && await publicClient.getBalance({address}) < parseEther('10')+request.value!+gas*fees.maxFeePerGas) throw new Error('Keep 10 MON available in this smart account after the deposit and maximum network fee. No deposit was sent.');
       const cost = formatEther(gas * fees.maxFeePerGas);
       setTx({ stage: 'signature', label, cost });
       const hash = await wallet.writeContract({ ...request, account: address, chain: publicClient.chain, gas, ...fees });
@@ -89,7 +99,7 @@ export function useTransaction() {
       }
       return receipt;
     } catch (error) {
-      setTx(previous => ({ ...previous, stage: receipt?.status === 'success' ? 'confirmed' : 'failed', error: friendlyError(error) }));
+      setTx(previous => ({ ...previous, stage: receipt?.status === 'success' ? 'confirmed' : 'failed', error: expectedChainId === 143 && /insufficient funds/i.test((error as Error).message) ? 'Not enough MON on Monad Mainnet for this transaction.' : friendlyError(error) }));
       throw error;
     }
   }
