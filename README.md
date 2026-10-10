@@ -224,6 +224,15 @@ Shared collection: `npm run shared:test` passed 21 local contract/browser checks
 
 **Build-in-public reach:** 1,000+ impressions across platforms, reported by the team. This is awareness, not verified customer traction; impressions are not equivalent to video views.
 
+public links-
+1.https://x.com/Jayeshweb3/status/2108886992897614328?s=20
+2.https://lnkd.in/p/g6pdr5CE
+3.https://x.com/neel_pote/status/2108884693081018704?s=20
+4.https://x.com/neel_pote/status/2108796617784488151?s=20
+5.https://x.com/Jayeshweb3/status/2108817045047644573?s=20
+6.https://www.instagram.com/stories/neel.pote/4004718172208380398?utm_source=ig_story_item_share&srtk=MXBiOGo3cGllaW0xNQ==
+7.https://x.com/neel_pote/status/2108817291119083585?s=20
+
 Artists and sports communities can use living collectibles to express ongoing participation rather than a static purchase. The proposed revenue model is **commissioned collections and optional hosted publishing services**, not returns on deposited funds.
 
 Next validation steps are community interviews, artist-led pilots, and measuring independent mints and repeat visits after real results. Revenue and product-market fit are not yet established. Commercial sports branding and data rights require separate review; this prototype is not affiliated with Formula 1 or its teams.
